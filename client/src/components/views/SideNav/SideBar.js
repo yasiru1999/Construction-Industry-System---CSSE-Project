@@ -105,11 +105,6 @@ const Sidebar = () => {
                             <SidebarWrap>
                                 <Upper></Upper>
                                 <div className={'wrap'}>
-
-                                    <NavLogo to='#'>
-                                        <img className={'userImage'} src={User}/>
-                                        Yasiru
-                                    </NavLogo>
                                 </div>
                                 <hr className={'hr'}/>
                                 {SideBarDataForAccountant.map((item, index) => {
