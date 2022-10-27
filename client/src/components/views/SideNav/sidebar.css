@@ -1,0 +1,11 @@
+.userImage{
+    height: 60px;
+    width: 60px;
+    display: block;
+    margin-left: 80px;
+    margin-top: 5px;
+}
+.hr{
+    border: 1px solid black;
+
+}
