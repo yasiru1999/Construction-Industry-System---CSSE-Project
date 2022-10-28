@@ -16,6 +16,7 @@ const addSite = async (request, response) => {
             response.status(200).
             json({
                 success: true,
+                site: site
             })
         }
     });
@@ -57,38 +58,42 @@ const getSites = async (request, response) => {
 //change
 const updateSite = async (request,response) => {
     const site = new Site(request.body);
-    try {
-        Site.findByIdAndUpdate(request.params.id, site, (error, data) => {
-            if (error) {
-                response.status(500).json({error: error.message});
-            } else {
-                response.status(200).json({
+
+    console.log(site);
+
+     await Site.findByIdAndUpdate(request.body._id,site,
+        (error,site) => {
+            if(error){
+                console.log(error);
+                response.status(500).json({ error: error.message });
+            }
+            else{
+                response.status(200).
+                json({
                     success: true,
-                    site: data
+                    site: site     
                 })
             }
-        })
-    } catch (e) {
-        console.log(e);
-    }
+        });
 }
 
 const deleteSite = async (request,response) => {
-    try {
-        Site.findByIdAndDelete(request.params.id, (error, data) => {
-            if (error) {
-                response.status(500).json({error: error.message});
-            } else {
-                response.status(200).json({
-                    success: true,
-                    site: data
-                })
-            }
-        })
-    } catch (e) {
-        console.log(e);
-    }
+    await Site.findByIdAndRemove(request.params.id,(error,site) => {
+        if(error){
+            response.status(500).json({ error: error.message });
+        }
+        else{
+            response.status(200).
+            json({
+                success: true,
+                site: site
+            })
+        }
+    })
 }
+
+
+
 
 module.exports = {
     addSite,
@@ -96,5 +101,6 @@ module.exports = {
     getSites,
     updateSite,
     deleteSite
+
 }
 
