@@ -25,6 +25,9 @@ import {EditRestaurant} from "./components/views/Restaurant/EditRestaurant";
 import {EditHall} from "./components/views/Halls/EditHall";
 
 
+import {AddSite} from "./components/views/Sites/AddSite";
+
+
 function App() {
     return (
         <Router>
@@ -54,6 +57,8 @@ function App() {
                     <Route path='/employees' exact component={Employees} />
                     <Route path='/employees/add-employee' exact component={AddEmployee} />
                     <Route path='/employees/edit-employee/:id' exact component={EditEmployee} />
+
+                    <Route path='/sites/add-site' exact component={AddSite} />
 
 
                 </Switch>

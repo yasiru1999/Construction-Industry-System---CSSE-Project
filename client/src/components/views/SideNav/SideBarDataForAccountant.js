@@ -21,10 +21,10 @@ export const SideBarDataForAccountant = [
     },
     {
         title: 'Site Details',
-        path: '/'
+        path: '/AddSite'
     },
     {
         title: 'Employee Details',
-        path: '/'
+        path: '/AddEmployee'
     }
 ];
