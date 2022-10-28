@@ -64,8 +64,6 @@ export const AddEmployee = () => {
     const formik = useFormik({
         initialValues: {
             name: '',
-            type: '',
-            gender: '',
             dateOfBirth: '',
             permanentAddress: '',
             nationalID: '',
@@ -84,8 +82,6 @@ export const AddEmployee = () => {
             };
             const employees = {
                 employeeName: values.name,
-                type: values.type,
-                gender: values.gender,
                 dateOfBirth: values.dateOfBirth,
                 permanentAddress: values.permanentAddress,
                 nationalID: values.nationalID,
@@ -135,46 +131,7 @@ export const AddEmployee = () => {
                             error={formik.touched.name && Boolean(formik.errors.name)}
                             helperText={formik.touched.name && formik.errors.name}
                         />
-                        <InputLabel id="type">Type</InputLabel>
-                        <TextField
-                            fullWidth
-                            labelId="type"
-                            select
-                            id="type"
-                            name="type"
-                            autoWidth
-                            variant='outlined'
-                            value={formik.values.type}
-                            onChange={formik.handleChange}
-                            error={formik.touched.type && Boolean(formik.errors.type)}
-                            helperText={formik.touched.type && formik.errors.type}
-                            style={{'marginTop': '10px'}}
-                        >
-                            <MenuItem value={1}>Event Planner</MenuItem>
-                            <MenuItem value={2}>Executive Chef</MenuItem>
-                            <MenuItem value={3}>Hotel General Manager</MenuItem>
-                            <MenuItem value={4}>Waiter/Waitress</MenuItem>
-                        </TextField>
-                        <br/>
-                        <InputLabel id="type">Gender</InputLabel>
-                        <TextField
-                            fullWidth
-                            labelId="gender"
-                            select
-                            id="gender"
-                            name="gender"
-                            autoWidth
-                            variant='outlined'
-                            value={formik.values.gender}
-                            onChange={formik.handleChange}
-                            error={formik.touched.gender && Boolean(formik.errors.gender)}
-                            helperText={formik.touched.gender && formik.errors.gender}
-                            style={{'marginTop': '10px'}}
-                        >
-                            <MenuItem value={1}>Male</MenuItem>
-                            <MenuItem value={2}>Female</MenuItem>
-
-                        </TextField>
+                       
                         <TextField
                             fullWidth
                             id="dateOfBirth"
