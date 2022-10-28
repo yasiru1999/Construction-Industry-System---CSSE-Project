@@ -4,6 +4,8 @@ import Sidebar from './components/views/SideNav/SideBar'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import {LandingDashBoard} from "./components/views/LandingDashBoard/LandingDashBoard";
+import Login from "./components/views/LoginPage/LoginPage";
+import Register from "./components/views/RegisterPage/RegisterPage"
 import {Halls} from "./components/views/Halls/Halls";
 import {AddHall} from "./components/views/Halls/AddHall";
 import {Rooms} from "./components/views/Rooms/Rooms";
@@ -33,6 +35,8 @@ function App() {
             <div>
                 <Switch>
                     <Route path='/' exact component={LandingDashBoard} />
+                    <Route path='/login' exact component={Login} />
+                    <Route path='/register' exact component={Register} />
 
                     <Route path='/RoomReservation' exact component={RoomReservation} />
                     <Route path='/halls' exact component={Halls} />

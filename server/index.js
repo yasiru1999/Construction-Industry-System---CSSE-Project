@@ -40,6 +40,7 @@ app.route('/').get((req,res) => {
     res.send('Test API call');
 })
 
+app.use('/api/users', require('./routes/users'));
 app.use('/rooms',roomRoute());
 app.use('/halls',hallRoute());
 app.use('/foods',foodRoute());
