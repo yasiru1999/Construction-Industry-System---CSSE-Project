@@ -13,6 +13,8 @@ const employeeRoute = require('./routes/employee.route');
 const roomReservationRoute = require('./routes/room.reservation.route');
 const hallReservationRoute = require('./routes/hall.reservation.route');
 
+const purchaseOrderRoute = require('./routes/purchaseOrder.route');
+
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -49,6 +51,12 @@ app.use('/files', fileRoute());
 app.use('/uploads', express.static('uploads'));
 app.use('/roomReservations', roomReservationRoute());
 app.use('/hallReservations', hallReservationRoute());
+
+
+
+app.use('/purchaseOrder',purchaseOrderRoute());
+
+
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);
