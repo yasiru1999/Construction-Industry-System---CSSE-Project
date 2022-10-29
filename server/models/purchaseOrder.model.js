@@ -4,86 +4,86 @@ const Schema = mongoose.Schema;
 
 const purchaseOrderSchema = new Schema({
 
-    SiteName : {
+    siteName : {
         type : String,
         // required: true
 
     },
-    SiteManager : {
+    siteManager : {
         type : String,
         // required: true
     },
-    SiteContactNo : {
+    siteContactNo : {
         type : String,
         // required: true
     },
-    SiteAddress : {
+    siteAddress : {
         type : String,
         // required: true
     },
-    Item : {
-        type : String,
-        // required: true
-    },
-
-    OrderQty : {
+    item : {
         type : String,
         // required: true
     },
 
-    ApprovedQty : {
-        type : String,
-        default : '0'
+    orderQty : {
+        type : Number,
+        // required: true
     },
 
-    DueDate : {
+    approvedQty : {
+        type : Number,
+        default : 0
+    },
+
+    dueDate : {
         type : String
     },
 
-    Approver : {
+    approver : {
       type : String
     },
 
-    Priority : {
+    priority : {
       type : String
     },
 
-    ApprovelStatus : {
+    approvelStatus : {
       type : String,
       default : 'Pending'
     },
 
-    Comment : {
+    comment : {
       type : String,
       default : 'No Comment'
     },
 
-    Condition : {
+    condition : {
       type : String,
       default : 'No Condition'
     },
 
-    DeliveryStatus : {
+    deliveryStatus : {
       type : String,
       default : 'Pending'
     },
 
-    SupCompany : {
+    supCompany : {
       type : String,
       default : 'Not Assigned'
     },
 
-    SupName : {
+    supName : {
       type : String,
       default : 'Not Assigned'
     },
 
-    SupContact : {
+    supContact : {
       type : String,
       default : 'Not Assigned'
     },
 
-    SupAddress : {
+    supAddress : {
       type : String,
       default : 'Not Assigned'
     }
