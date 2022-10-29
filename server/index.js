@@ -13,7 +13,9 @@ const employeeRoute = require('./routes/employee.route');
 const roomReservationRoute = require('./routes/room.reservation.route');
 const hallReservationRoute = require('./routes/hall.reservation.route');
 
+
 const purchaseOrderRoute = require('./routes/purchaseOrder.route');
+const siteRoute = require('./routes/site.route');
 
 dotenv.config();
 const app = express();
@@ -42,6 +44,7 @@ app.route('/').get((req,res) => {
     res.send('Test API call');
 })
 
+app.use('/api/users', require('./routes/users'));
 app.use('/rooms',roomRoute());
 app.use('/halls',hallRoute());
 app.use('/foods',foodRoute());
@@ -53,9 +56,8 @@ app.use('/roomReservations', roomReservationRoute());
 app.use('/hallReservations', hallReservationRoute());
 
 
-
-app.use('/purchaseOrder',purchaseOrderRoute());
-
+app.use('/purchaseOrder',purchaseOrderRoute())
+app.use('/sites', siteRoute());
 
 
 app.listen(PORT,()=>{
