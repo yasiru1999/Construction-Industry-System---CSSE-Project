@@ -43,6 +43,7 @@ function LoginPage(props) {
                       if (response.data.loginSuccess) {
                         window.localStorage.setItem('userId', response.data.userId);
                         window.localStorage.setItem('name', response.data.name);
+                          window.localStorage.setItem('role', response.data.Role);
                         props.history.push("/RoomReservation");
                       } else {
                         setFormErrorMessage('Check out your Account or Password again')
@@ -68,7 +69,7 @@ function LoginPage(props) {
               handleSubmit,
             }) => (
               <div className="login">
-                <div className="form">
+                <div className="for2">
                   {/* Passing handleSubmit parameter tohtml form onSubmit property */}
                   <form noValidate onSubmit={handleSubmit}>
                     <span>Login</span>
