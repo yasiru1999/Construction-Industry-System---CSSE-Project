@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {LandingDashBoard} from "./components/views/LandingDashBoard/LandingDashBoard";
 import Login from "./components/views/LoginPage/LoginPage";
 import Register from "./components/views/RegisterPage/RegisterPage"
+import {AddItems} from "./components/views/Suppliers/AddItems"
 import {Halls} from "./components/views/Halls/Halls";
 import {AddHall} from "./components/views/Halls/AddHall";
 import {Rooms} from "./components/views/Rooms/Rooms";
@@ -41,6 +42,7 @@ function App() {
                     <Route path='/' exact component={LandingDashBoard} />
                     <Route path='/login' exact component={Login} />
                     <Route path='/register' exact component={Register} />
+                    <Route path='/addItems' exact component={AddItems} />
 
                     <Route path='/RoomReservation' exact component={RoomReservation} />
                     <Route path='/halls' exact component={Halls} />
