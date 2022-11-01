@@ -1,11 +1,85 @@
-.code-box-demo .ant-select {
-    margin: 0 8px 10px 0;
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+body {
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
 }
 
-.ant-row-rtl .code-box-demo .ant-select {
-    margin: 0 0 10px 8px;
+.app{
+    text-align: center;
+    margin-top: 20px;
+}
+.login {
+    width: 360px;
+    /*padding: 8% 0 0;*/
+    margin-top: -125px;
+    font-family: 'Comfortaa', cursive;
 }
 
-#components-select-demo-search-box .code-box-demo .ant-select {
-    margin: 0;
+.for {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    border-radius: 10px;
+    max-width: 360px;
+    /*margin: 0 auto 100px;*/
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: left;
+}
+
+.for input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: 'Comfortaa', cursive;
+}
+
+.for input:focus {
+    background: #dbdbdb;
+}
+
+.for button {
+    font-family: 'Comfortaa', cursive;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4b6cb7;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+
+}
+
+.for button:active {
+    background: #395591;
+}
+
+.for span {
+    font-size: 30px;
+    color: #FFFFFF;
+    margin-top: 20px;
+    display: block;
+}
+
+.for p.error {
+    margin: 0 0 10px 10px;
+    text-align: left;
+    font-size: 10px;
+    color: red;
+}
+
+.radio{
+    background-color: #FFFFFF;
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
 }

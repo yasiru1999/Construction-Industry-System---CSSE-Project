@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const purchaseOrderSchema = new Schema({
-
+    orderId : {
+      type : String,
+      // required: true
+    },
     siteName : {
         type : String,
         // required: true
-
     },
     siteManager : {
         type : String,

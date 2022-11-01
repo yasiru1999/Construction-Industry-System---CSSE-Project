@@ -66,8 +66,8 @@ const Upper = styled.div`
 `;
 
 const Sidebar = () => {
-    const userType = localStorage.getItem('userType');
-    if (userType === "Supplier") {
+    const role = localStorage.getItem('role');
+    if (role === "Supplier") {
         return (
             <>
 
@@ -94,7 +94,7 @@ const Sidebar = () => {
                 </SideBar>
             </>
         );
-    }else if (userType === "Accountant") {
+    }else if (role === "Accountant") {
         return (
             <>
 
@@ -115,6 +115,13 @@ const Sidebar = () => {
                     </IconContext.Provider>
                 </SideBar>
             </>
+        )
+    } else {
+        return (
+        <>
+
+
+        </>
         )
     }
 };

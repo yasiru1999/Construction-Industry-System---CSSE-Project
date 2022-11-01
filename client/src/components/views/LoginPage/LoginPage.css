@@ -11,7 +11,7 @@
     font-family: 'Comfortaa', cursive;
 }
 
-.form {
+.for2 {
     position: relative;
     z-index: 1;
     background: #FFFFFF;
@@ -19,10 +19,11 @@
     max-width: 360px;
     margin: 0 auto 100px;
     padding: 45px;
+    margin-top: 100px;
     text-align: center;
 }
 
-.form input {
+.for2 input {
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -35,11 +36,11 @@
     font-family: 'Comfortaa', cursive;
 }
 
-.form input:focus {
+.for2 input:focus {
     background: #dbdbdb;
 }
 
-.form button {
+.for2 button {
     font-family: 'Comfortaa', cursive;
     text-transform: uppercase;
     outline: 0;
@@ -55,18 +56,18 @@
     cursor: pointer;
 }
 
-.form button:active {
+.for2 button:active {
     background: #395591;
 }
 
-.form span {
+.for2 span {
     font-size: 40px;
     color: #4b6cb7;
     margin-bottom: 25px;
     display: block;
 }
 
-.form p.error {
+.for2 p.error {
     margin: 0 0 10px 10px;
     text-align: left;
     font-size: 10px;

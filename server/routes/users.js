@@ -17,7 +17,6 @@ router.get("/auth", auth, (req, res) => {
         isAuth: true,
         email: req.user.email,
         name: req.user.name,
-        Role: req.user.Role
     });
 });
 
@@ -55,6 +54,7 @@ router.post("/login", (req, res) => {
                         loginSuccess: true,
                         userId: user._id,
                         name: user.name,
+                        Role: user.Role
                     });
             });
         });
