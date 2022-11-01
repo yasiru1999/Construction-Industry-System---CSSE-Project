@@ -28,6 +28,7 @@ import {EditHall} from "./components/views/Halls/EditHall";
 
 
 import {AddSite} from "./components/views/Sites/AddSite";
+import {PurchaseOrder} from "./components/views/PurchaseOrders/PurchaseOrders";
 
 
 function App() {
@@ -58,11 +59,15 @@ function App() {
                     <Route path='/restaurant/restaurants' exact component={Restaurants} />
                     <Route path='/restaurants/add-restaurant' exact component={AddRestaurant} />
                     <Route path='/restaurants/edit-restaurant/:id' exact component={EditRestaurant} />
+
+
                     <Route path='/employees' exact component={Employees} />
                     <Route path='/employees/add-employee' exact component={AddEmployee} />
                     <Route path='/employees/edit-employee/:id' exact component={EditEmployee} />
 
                     <Route path='/sites/add-site' exact component={AddSite} />
+
+                    <Route path='/purchaseOrder' exact component={PurchaseOrder} />
 
 
                 </Switch>
