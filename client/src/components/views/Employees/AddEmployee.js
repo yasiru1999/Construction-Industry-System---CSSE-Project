@@ -73,13 +73,6 @@ export const AddEmployee = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-
-            const formData = new FormData();
-            const config = {
-                headers: {
-                    'content-type': 'multipart/form-data'
-                }
-            };
             const employees = {
                 employeeName: values.name,
                 dateOfBirth: values.dateOfBirth,
@@ -89,7 +82,7 @@ export const AddEmployee = () => {
                 email: values.email,
             }
             console.log("imageFile",employees);
-            axios.post('http://localhost:8080/employees', employees)
+            axios.post('http://localhost:8070/employees', employees)
                 .then(response => {
                     if (response.data.success) {
                         alert('Employee  Successfully Added')
@@ -104,8 +97,8 @@ export const AddEmployee = () => {
             console.log("employees",values)
         },
     });
-    useEffect(() => {
-    }, [])
+    
+
     return (
         <div className={'content'}>
             <div className={'dashboard-header'}>
@@ -131,7 +124,8 @@ export const AddEmployee = () => {
                             error={formik.touched.name && Boolean(formik.errors.name)}
                             helperText={formik.touched.name && formik.errors.name}
                         />
-                       
+                        
+
                         <TextField
                             fullWidth
                             id="dateOfBirth"
