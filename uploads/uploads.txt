@@ -1,1 +1,0 @@
-This is a required folder to the file upload functionality of the backend api

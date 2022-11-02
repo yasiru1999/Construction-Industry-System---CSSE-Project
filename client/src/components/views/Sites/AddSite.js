@@ -33,31 +33,9 @@ const SubmitButton = styled.button`
   }
 `;
 export const AddSite = () => {
+
+
     const validationSchema = yup.object({
-        /*name: yup
-            .string('Enter employee name')
-            .required('Name is required'),
-        type: yup
-            .string('Select employee type')
-            .required('Type is required'),
-        gender: yup
-            .string('Select gender type')
-            .required('Gender is required'),
-        dateOfBirth: yup
-            .string('Enter the date of birth')
-            .required('Date of birth is required'),
-        permanentAddress: yup
-            .string('Enter permanent address')
-            .required('Permanent address is required'),
-        nationalId: yup
-            .string('Enter the National ID card number')
-            .required('NIC is required'),
-        phoneNumber: yup
-            .string('Enter the phone number')
-            .required('Phone number is required'),
-        email: yup
-            .string('Enter the email')
-            .required('email is required'),*/
 
     });
 
@@ -66,7 +44,6 @@ export const AddSite = () => {
             siteName: '',
             siteManagerName: '',
             phoneNumber: '',
-            dateOfBirth: '',
             address: '',
             budget: '',
         },
@@ -76,19 +53,18 @@ export const AddSite = () => {
             const formData = new FormData();
             const config = {
                 headers: {
-                    'content-type': 'multipart/form-data'
+                   
                 }
             };
             const sites = {
                 siteName: values.siteName,
                 siteManagerName: values.siteManagerName,
                 phoneNumber: values.phoneNumber,
-                dateOfBirth: values.dateOfBirth,
                 address: values.address,
                 budget: values.budget,
             }
             console.log(sites);
-            axios.post('http://localhost:8080/api/site/add', sites, config)
+            axios.post('http://localhost:8070/sites/add', sites, config)
                 .then(response => {
                     if (response.data.success) {
                         alert('Site Added Successfully')
@@ -101,80 +77,90 @@ export const AddSite = () => {
     });
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-md-8 m-auto">
-                    <h1 className="display-4 text-center">Add Site</h1>
-                    <p className="lead text-center">
-                        Create new site
-                    </p>
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Site Name"
-                                name="siteName"
-                                className="form-control"
-                                value={formik.values.siteName}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Site Manager Name"
-                                name="siteManagerName"
-                                className="form-control"
-                                value={formik.values.siteManagerName}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Phone Number"
-                                name="phoneNumber"
-                                className="form-control"
-                                value={formik.values.phoneNumber}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Date of Birth"
-                                name="dateOfBirth"
-                                className="form-control"
-                                value={formik.values.dateOfBirth}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Address"
-                                name="address"
-                                className="form-control"
-                                value={formik.values.address}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <input
-                                type="text"
-                                placeholder="Budget"
-                                name="budget"
-                                className="form-control"
-                                value={formik.values.budget}
-                                onChange={formik.handleChange}
-                            />
-                        </div>
-                        <SubmitButton type="submit" className="btn btn-primary btn-block mt-4">
-                            Submit
-                        </SubmitButton>
-                    </form>
+        <div className={'content'}>
+            <div className={'dashboard-header'}>
+                Site Management
+                <div className={'dashboard-subheader'}>
+                    {/*TODO Align icon an route to go back*/}
+                    <Icon style={{
+                        color: '#5a2360',
+                    }}>arrow_back_ios</Icon>
+                    Add Site
                 </div>
             </div>
+            <div className={'main-container'}>
+                <div className={'form-container'}>
+                    <form onSubmit={formik.handleSubmit}>
+                        <TextField
+                            fullWidth
+                            id="siteName"
+                            name="siteName"
+                            label="Site Name"
+                            value={formik.values.siteName}
+                            onChange={formik.handleChange}
+                            error={formik.touched.siteName && Boolean(formik.errors.siteName)}
+                            helperText={formik.touched.siteName && formik.errors.siteName}
+                        />
+                        <TextField
+                            fullWidth
+                            id="siteManagerName"
+                            name="siteManagerName"
+                            label="Site Manager Name"
+                            value={formik.values.siteManagerName}
+                            onChange={formik.handleChange}
+                            error={formik.touched.siteManagerName && Boolean(formik.errors.siteManagerName)}
+                            helperText={formik.touched.siteManagerName && formik.errors.siteManagerName}
+                        />
+                        <TextField
+                            fullWidth
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            label="Site Contact Number"
+                            value={formik.values.phoneNumber}
+                            onChange={formik.handleChange}
+                            error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
+                            helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+                        />
+                        <TextField
+                            fullWidth
+                            id="address"
+                            name="address"
+                            label="Site Address"
+                            multiline
+                            value={formik.values.address}
+                            onChange={formik.handleChange}
+                            error={formik.touched.address && Boolean(formik.errors.address)}
+                            helperText={formik.touched.address && formik.errors.address}
+                        />
+                        <TextField
+                            fullWidth
+                            id="budget"
+                            name="budget"
+                            label="Budget"
+                            value={formik.values.budget}
+                            onChange={formik.handleChange}
+                            error={formik.touched.budget && Boolean(formik.errors.budget)}
+                            helperText={formik.touched.budget && formik.errors.budget}
+                        />
+                        
+
+
+                        <SubmitButton
+                            style={{
+                                float: 'right',
+                                marginTop: '10px',
+                                backgroundColor: '#5a2360',
+                                fontFamily: 'Josefin Sans'
+                            }}
+                            type="submit"
+                        >
+                            Add Site
+                        </SubmitButton>
+                    </form>
+
+
+                </div>
+                </div>
         </div>
     );
 };

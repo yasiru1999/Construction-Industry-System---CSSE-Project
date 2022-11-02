@@ -88,6 +88,22 @@ const purchaseOrderSchema = new Schema({
     supAddress : {
       type : String,
       default : 'Not Assigned'
+    },
+
+    orderId : {
+      type : String,
+    },
+
+    itemName : {
+      type : String,
+    },
+
+    quantity : {
+      type : Number,
+    },
+
+    approver : {
+      type : String,
     }
     
 }, {

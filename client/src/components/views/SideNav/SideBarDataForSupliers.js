@@ -8,7 +8,7 @@ export const SideBarDataForSupliers = [
     },
     {
         title: 'Add Items',
-        path: '/'
+        path: '/addItems'
 
     },
     {

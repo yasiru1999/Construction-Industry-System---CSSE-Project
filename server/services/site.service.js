@@ -4,8 +4,6 @@ const addSite = async (request, response) => {
 
     const site = new Site(request.body);
 
-    console.log(site);
-
 
     await site.save((error, site) => {
         if(error){

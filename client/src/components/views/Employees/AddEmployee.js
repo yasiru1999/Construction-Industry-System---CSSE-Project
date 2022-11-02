@@ -73,13 +73,6 @@ export const AddEmployee = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-
-            const formData = new FormData();
-            const config = {
-                headers: {
-                    'content-type': 'multipart/form-data'
-                }
-            };
             const employees = {
                 employeeName: values.name,
                 dateOfBirth: values.dateOfBirth,
@@ -89,7 +82,7 @@ export const AddEmployee = () => {
                 email: values.email,
             }
             console.log("imageFile",employees);
-            axios.post('http://localhost:8080/employees', employees)
+            axios.post('http://localhost:8070/employees', employees)
                 .then(response => {
                     if (response.data.success) {
                         alert('Employee  Successfully Added')
@@ -104,8 +97,8 @@ export const AddEmployee = () => {
             console.log("employees",values)
         },
     });
-    useEffect(() => {
-    }, [])
+    
+
     return (
         <div className={'content'}>
             <div className={'dashboard-header'}>
@@ -131,18 +124,28 @@ export const AddEmployee = () => {
                             error={formik.touched.name && Boolean(formik.errors.name)}
                             helperText={formik.touched.name && formik.errors.name}
                         />
-                       
+                        
+
+                        <div style={{
+                            paddingTop: '1rem',
+                        }}>
                         <TextField
-                            fullWidth
-                            id="dateOfBirth"
-                            name="dateOfBirth"
-                            label="DateOfBirth"
-                            multiline
-                            value={formik.values.dateOfBirth}
+                        fullWidth
+                         id="dateOfBirth"
+                         label="Birthday"
+                         type="date"
+                        //  defaultValue="2017-05-24"
+                         sx={{ width: 220 }}
+                         InputLabelProps={{
+                         shrink: true,
+                           }}
+                           value={formik.values.date}
                             onChange={formik.handleChange}
-                            /*error={formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)}
-                            helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}*/
-                        />
+                            error={formik.touched.date && Boolean(formik.errors.date)}
+                            helperText={formik.touched.date && formik.errors.date}
+
+      />
+                            </div> 
                         <TextField
                             fullWidth
                             id="permanentAddress"
