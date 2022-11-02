@@ -192,7 +192,7 @@ export const AddEmployee = () => {
                             style={{
                                 float: 'right',
                                 marginTop: '10px',
-                                backgroundColor: '#5a2360',
+                                backgroundColor: '#326ad9',
                                 fontFamily: 'Josefin Sans'
                             }}
                             type="submit"

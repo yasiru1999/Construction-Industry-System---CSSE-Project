@@ -52,6 +52,7 @@ export const PurchaseOrders = () => {
             >
                 <MaterialTable
                     title="Add employees"
+                    style={{backgroundColor:"#cae3f5",borderRadius:'20px'}}
                     columns={[
                         { title: 'id', field: 'id', hidden: true },
                         { title: 'Order Id', field: 'orderId' },
