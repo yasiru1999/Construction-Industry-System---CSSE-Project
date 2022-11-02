@@ -80,25 +80,7 @@ export const Rooms = () => {
         })
     }
 
-    return isLoading ? (
-            <div className={'content'}>
-                <div className={'dashboard-header'}>
-                    Rooms & Suite Management
-                </div>
-                <div className={'main-container-tables'}>
-                    <div className={'table-container'}>
-                        Fetching data...
-                        <JumpCircleLoading
-                            color ="#5a2360"
-                            speed = {0.5}
-                            size = "large"
-
-                        />
-                    </div>
-                </div>
-            </div>
-        )
-        :(
+    return (
         <div className={'content'}>
             <div className={'dashboard-header'}>
                 Rooms & Suite Management

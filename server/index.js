@@ -16,6 +16,7 @@ const hallReservationRoute = require('./routes/hall.reservation.route');
 
 const purchaseOrderRoute = require('./routes/purchaseOrder.route');
 const siteRoute = require('./routes/site.route');
+const supplyItemsRoute = require('./routes/SupplyItem.route');
 
 dotenv.config();
 const app = express();
@@ -58,7 +59,7 @@ app.use('/hallReservations', hallReservationRoute());
 
 app.use('/purchaseOrder',purchaseOrderRoute())
 app.use('/sites', siteRoute());
-
+app.use('/supplyItem', supplyItemsRoute());
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);

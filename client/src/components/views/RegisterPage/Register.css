@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
-body {
-    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
-}
+
 
 .app{
     text-align: center;
-    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
 }
 .login {
     width: 360px;

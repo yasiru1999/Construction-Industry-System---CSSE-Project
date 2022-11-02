@@ -68,45 +68,48 @@ function LoginPage(props) {
               handleBlur,
               handleSubmit,
             }) => (
-              <div className="login">
-                <div className="for2">
-                  {/* Passing handleSubmit parameter tohtml form onSubmit property */}
-                  <form noValidate onSubmit={handleSubmit}>
-                    <span>Login</span>
-                    {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
-                    <input
-                        type="email"
-                        name="email"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.email}
-                        placeholder="Enter email"
-                        className="form-control inp_text"
-                        id="email"
-                    />
-                    {/* If validation is not passed show errors */}
-                    <p className="error">
-                      {errors.email && touched.email && errors.email}
-                    </p>
-                    {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
-                    <input
-                        type="password"
-                        name="password"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.password}
-                        placeholder="Enter password"
-                        className="form-control"
-                    />
-                    {/* If validation is not passed show errors */}
-                    <p className="error">
-                      {errors.password && touched.password && errors.password}
-                    </p>
-                    {/* Click on submit button to submit the form */}
-                    <button type="submit">Login</button>
-                  </form>
+                <div className="app">
+                    <div className="login">
+                        <div className="for2">
+                            {/* Passing handleSubmit parameter tohtml form onSubmit property */}
+                            <form noValidate onSubmit={handleSubmit}>
+                                <span>Login</span>
+                                {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
+                                <input
+                                    type="email"
+                                    name="email"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.email}
+                                    placeholder="Enter email"
+                                    className="form-control inp_text"
+                                    id="email"
+                                />
+                                {/* If validation is not passed show errors */}
+                                <p className="error">
+                                    {errors.email && touched.email && errors.email}
+                                </p>
+                                {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
+                                <input
+                                    type="password"
+                                    name="password"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.password}
+                                    placeholder="Enter password"
+                                    className="form-control"
+                                />
+                                {/* If validation is not passed show errors */}
+                                <p className="error">
+                                    {errors.password && touched.password && errors.password}
+                                </p>
+                                {/* Click on submit button to submit the form */}
+                                <button type="submit">Login</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
           )}
         </Formik>
       </>
