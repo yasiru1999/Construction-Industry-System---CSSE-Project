@@ -1,0 +1,250 @@
+
+/*@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');*/
+
+
+.page {
+  width: 90%;
+  padding-left: 12%;
+  padding-top: 3%;
+  padding-right: 0;
+  margin: auto;
+  font-family: 'Comfortaa', cursive;
+}
+
+/* Create two equal columns that floats next to each other */
+.column1 {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  /*height: 500px; /* Should be removed. Only for demonstration */
+}
+
+.column3 {
+  float: left;
+  width: 50%;
+  padding-top: 10px;
+  padding-right: 0;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  /*height: 500px; /* Should be removed. Only for demonstration */
+}
+  
+.column2 {
+  float: left;
+  width: 44%;
+  padding: 10px;
+  /*height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.columnIn2 {
+  float: left;
+  width: 56%;
+  padding: 10px;
+  /*height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.column22 {
+  float: left;
+  width: 42%;
+  padding: 10px;
+  /*height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.column23 {
+  float: left;
+  width: 58%;
+  padding: 10px;
+  /*height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.column24 {
+  float: left;
+  width: 40%;
+  padding: 10px;
+  /*height: 300px; /* Should be removed. Only for demonstration */
+}
+
+.column25 {
+  float: left;
+  width: 60%;
+  padding: 10px;
+  /*height: 300px; /* Should be removed. Only for demonstration */
+}
+  
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+  
+    /* Add some padding inside the card container */
+  .container {
+    padding: 2px 16px;
+  }
+  
+  .card2 {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #d5e7f5;
+  }
+
+  .topicOne{
+    font-weight: 900;
+  }
+
+  .selSuptopic{
+    float: left;
+    font-weight: 900;
+  }
+
+  .topicPoNum{
+    float: right;
+    font-weight: 900;
+  }
+
+  .dataleft22{
+    float: left;
+    text-align: left;
+  }
+
+  .dataleft23{
+    font-weight: 900;
+    float: left;
+    text-align: left;
+  }
+  
+
+
+  .buttonSup {
+    border-radius: 10px;
+    float:right;
+    background-color: #3b80e8;
+    border: 1px solid black;
+    color: white;
+    padding: 3px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+
+    margin: 4px 2px;
+  }
+  
+  .buttonSup:hover {
+    background-color: #83aff2;
+    color: white;
+  }
+
+
+
+  .columnR2 {
+    float: left;
+    width: 56%;
+    padding: 10px;
+    /*height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  .columnRIn2 {
+    float: left;
+    width: 44%;
+    padding: 10px;
+    /*height: 300px; /* Should be removed. Only for demonstration */
+  }
+
+  .columnR24 {
+    float: left;
+    width: 45%;
+    padding: 10px;
+    /*height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  .columnR25 {
+    float: left;
+    width: 55%;
+    padding: 10px;
+    /*height: 300px; /* Should be removed. Only for demonstration */
+  }
+
+  .card3 {
+    padding: 5px;
+    text-align: center;
+    background-color: #d5e7f5;
+    border: 1px solid black;
+  }
+
+  .tdPaddings{
+    padding-right: 50px;
+  }
+
+
+  .buttonAp {
+    border-radius: 10px;
+    float:right;
+    background-color: #77e065;
+    border: 1px solid black;
+    color: white;
+    padding: 3px 38px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .buttonRej {
+    border-radius: 10px;
+    float:right;
+    background-color: #f5600a;
+    border: 1px solid black;
+    color: white;
+    padding: 3px 45px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 42px;
+    margin-right: 42px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .buttonPaAp {
+    border-radius: 10px;
+    float:right;
+    background-color: #3b80e8;
+    border: 1px solid black;
+    color: white;
+    padding: 3px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
