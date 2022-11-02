@@ -11,16 +11,16 @@ export const PurchaseOrders = () => {
     const [purchaseOrders,setPurchaseOrders] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8070/purchaseOrders').
+        axios.get('http://localhost:8070/purchaseOrder/get-all').
         then((response) => {
             if(response.data.success) {
-                console.log(response.data.purchaseOrders);
-                setPurchaseOrders(response.data.purchaseOrders.map((item) => ({
+                console.log(response.data.purchaseOrder);
+                setPurchaseOrders(response.data.purchaseOrder.map((item) => ({
 
                     orderId: item.orderId,
                     itemName: item.itemName,
                     quantity: item.quantity,
-                    status: item.status,
+                    // status: item.status,
                     approver: item.approver,
 
                 })));
@@ -53,7 +53,7 @@ export const PurchaseOrders = () => {
                         { title: 'Order Id', field: 'orderId' },
                         { title: 'Item Name', field: 'itemName' },
                         { title: 'Quantity', field: 'quantity' },
-                        { title: 'Status', field: 'status' },
+                        // { title: 'Status', field: 'status' },
                         { title: 'Approver', field: 'approver' },
 
                     ]}
