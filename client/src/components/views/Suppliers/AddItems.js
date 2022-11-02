@@ -1,34 +1,45 @@
-import React, { useState} from 'react';
-import { useHistory } from "react-router-dom";
-import * as yup from "yup";
-import {useFormik} from "formik";
+import React, { useState,useEffect} from 'react';
+import {useHistory, withRouter} from "react-router-dom";
+import * as Yup from 'yup';
+import {Form, Input,} from 'antd';
+import Select from 'react-select';
+import { Formik } from 'formik';
 import axios from "axios";
 import styled from "styled-components";
 import "./Suppliers.css"
-import * as Yup from "yup";
+import {JumpCircleLoading} from "react-loadingg";
+import MaterialTable from "material-table";
+import {Button, Icon, Paper} from "@material-ui/core";
+
+const Items = [
+    { value: 'cement', label: 'cement' },
+    { value: 'iron bar', label: 'iron bar' }
+]
 
 // Creating schema
 const schema = Yup.object().shape({
-    email: Yup.string()
-        .required("Email is a required field")
-        .email("Invalid email format"),
-    password: Yup.string()
-        .required("Password is a required field")
-        .min(6, "Password must be at least 6 characters"),
+    SupItemID: Yup.string()
+        .required("ID is a required field"),
+    // ItemName: Yup.string()
+    //     .required("Item Name is a required field"),
+    Price: Yup.string()
+        .required("Price is a required field"),
+    qty: Yup.string()
+        .required("Quantity is a required field"),
 });
+
 
 const SubmitButton = styled.button`
   width: 120px;
   height: 40px;
   margin-left: 1rem;;
-  font-family: 'Josefin Sans', sans-serif;
   font-size: 15px;
   letter-spacing: 1.5px;
   font-weight: 500;
   color: #ffffff;
-  background-color: #fff;
+  background-color: #326ad9;
   border: none;
-  border-radius: 45px;
+  border-radius: 15px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease 0s;
   cursor: pointer;
@@ -36,97 +47,111 @@ const SubmitButton = styled.button`
   text-align: center;
 
   &:hover {
-    background-color: #5a2360;
+    background-color: #326ad9;
     box-shadow: 0px 4px 12px rgba(72, 28, 76, 0.4);
     color: #fff;
     transform: translateY(-2px);
   }
 `;
 
-export const AddItems = () => {
+function AddItems(props) {
 
     const history = useHistory();
+    const [formErrorMessage, setFormErrorMessage] = useState('');
+    const [SelectedItem,setSelectedItem] = useState('');
+    const [isLoading,setIsLoading] = useState(true);
+    const [items,setItems] = useState([]);
 
-    const validationSchema = yup.object({
-        name: yup
-            .string('Enter room name')
-            .required('Name is required'),
-        type: yup
-            .string('Select room type')
-            .required('Type is required'),
-        space: yup
-            .number('Space should be a number')
-            .label('space')
-            .positive()
-            .required('Space is required'),
-        guests: yup
-            .number()
-            .label('guests')
-            .positive()
-            .required('Guest count is required'),
-        height: yup
-            .number()
-            .label('height')
-            .positive(),
-        price: yup
-            .number()
-            .label('price')
-            .positive()
-            .required('Price is required'),
-        description: yup
-            .string('Enter the description')
-            .required('Description is required'),
-    });
-
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            type: '',
-            space: '',
-            guests: '',
-            height: '',
-            price: '',
-            description: '',
-            facilities: [],
-            events: [],
-            image: null,
-        },
-        validationSchema: validationSchema,
-        onSubmit: (values) => {
-
-            const hall = {
-                hallName: values.name,
-                type: values.type,
-                space: values.space,
-                guests: values.guests,
-                height: values.height,
-                price: values.price,
-                description: values.description,
-                facilities: values.facilities,
-                events: values.events,
+    useEffect(() => {
+        axios.get('http://localhost:8070/supplyItem').
+        then((response) => {
+            if(response.data.success) {
+                console.log(response.data.items);
+                setItems(response.data.items.map((item) => ({
+                    id: item._id,
+                    SupItemID: item.SupItemID,
+                    ItemName: item.ItemName,
+                    Price: item.Price,
+                    qty: item.qty
+                })));
+                // setIsLoading(false);
+            } else{
+                alert('An error occurred while retrieving data');
+                console.log(response.data.error);
             }
+        })
+    },[])
 
-            // axios.post('http://localhost:8080/halls', hall)
-            //     .then(response => {
-            //         axios.post("http://localhost:8080/files",formData,config)
-            //             .then(() => {
-            //                 if (response.data.success) {
-            //                     alert('Hall Successfully Added')
-            //                 } else {
-            //                     alert('Failed to add hall')
-            //                 }
-            //             }).catch((error) => {
-            //             alert(error.message);
-            //         });
-            //
-            //     }).catch((error) => console.error(error))
-        },
-    });
+    const deleteHall = async (props) => {
 
-    return (
+        const id = props.data.id;
+
+        await axios.delete('http://localhost:8070/supplyItem/' + id).
+        then((response) => {
+            if(response.data.success){
+                alert("Successfully deleted.");
+            }else {
+                alert('An error happened');
+                console.log(response.data.error);
+            }
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
+    return  (
+        <>
+            {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
+            <Formik
+                validationSchema={schema}
+                initialValues={{
+                    SupItemID: "",
+                    ItemName: "",
+                    Price: "",
+                    qty: ""
+            }}
+                onSubmit={(values, { setSubmitting }) => {
+                    setTimeout(() => {
+                        let dataToSubmit = {
+                            SupItemID: values.SupItemID,
+                            ItemName: SelectedItem.value,
+                            Price: values.Price,
+                            qty: values.qty
+                        };
+
+                        axios.post('http://localhost:8070/supplyItem/add', dataToSubmit)
+                            .then(response => {
+                                console.log(dataToSubmit)
+                                if (response.data.success) {
+                                    alert("Supply Items added successfully");
+                                    props.history.push("/addItems");
+                                    window.location.reload(false);
+                                } else {
+                                    alert("Supply Items added cancelled");
+                                }
+                            })
+                            .catch(err => {
+                                setTimeout(() => {
+                                    setFormErrorMessage("")
+                                }, 3000);
+                            });
+                        setSubmitting(false);
+                    }, 500);
+                }}
+
+            >
+                {({
+                      values,
+                      errors,
+                      touched,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                  }) => (
+
         <div className={'content'}>
             <div className={'dashboard-header'}>
-                Reception Hall Management
+                Add Supply Items
                 <div className={'dashboard-subheader'}>
                     {/*TODO Align icon an route to go back*/}
                     {/*<IconButton aria-label="back"*/}
@@ -144,32 +169,192 @@ export const AddItems = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="column left" style={{backgroundColor:'red'}}>
-                    <div className={'main-container'}>
-                    <div className={'form-container'}>
-                        <form onSubmit={formik.handleSubmit}>
+                <div className="column left" style={{backgroundColor:'#ffffff'}}>
 
+                        <div className="">
+                            <div className="for3">
+                                <Form noValidate onSubmit={handleSubmit}>
+                                    <Form.Item style={{textAlign:'left',fontSize:'15px'}} required label="Item ID">
+                                        <Input
+                                            id="SupItemID"
+                                            placeholder="Enter Item ID"
+                                            type="text"
+                                            value={values.SupItemID}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className="itemName"
+                                        />
+                                        <p className="error">
+                                            {errors.SupItemID && touched.SupItemID && errors.SupItemID}
+                                        </p>
+                                    </Form.Item>
 
-                            <SubmitButton
-                                style={{
-                                    float: 'right',
-                                    marginTop: '10px',
-                                    backgroundColor: '#5a2360',
-                                    fontFamily: 'Josefin Sans'
-                                }}
-                                type = "submit"
-                            >
-                                Add Hall
-                            </SubmitButton>
-                        </form>
+                                    <Form.Item style={{textAlign:'left',fontSize:'15px'}} required label="Item Name:">
+                                        <Select
+                                            id="ItemName"
+                                            options = {Items}
+                                            hasValue
+                                            setValue={values.ItemName}
+                                            onBlur={handleBlur}
+                                            onChange={setSelectedItem}
+                                            className="itemName"
+
+                                        />
+
+                                    </Form.Item>
+
+                                    <Form.Item style={{textAlign:'left',fontSize:'15px'}} required label="One Item Price">
+                                        <Input
+                                            id="Price"
+                                            placeholder="Enter Item Price"
+                                            type="text"
+                                            value={values.Price}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className="itemName"
+                                        />
+                                        <p className="error">
+                                            {errors.Price && touched.Price && errors.Price}
+                                        </p>
+                                    </Form.Item>
+
+                                    <Form.Item style={{textAlign:'left',fontSize:'15px'}} required label="Quantity">
+                                        <Input
+                                            id="qty"
+                                            placeholder="Enter Quantity"
+                                            type="text"
+                                            value={values.qty}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className="itemName"
+                                        />
+                                        <p className="error">
+                                            {errors.qty && touched.qty && errors.qty}
+                                        </p>
+                                    </Form.Item>
+                                    <SubmitButton
+                                        style={{
+                                            float: 'right',
+                                            marginTop: '10px',
+                                            backgroundColor: '#326ad9'
+                                        }}
+                                        type = "submit"
+                                    >
+                                        Submit
+                                    </SubmitButton>
+                                </Form>
+                            </div>
+                        </div>
+
+                </div>
+                <div className="column right" >
+                    <div className={''}>
+                        <div className={'main-container-tables2'}>
+                            <div className={''}>
+                                <MaterialTable
+                                    style={{backgroundColor:"#cae3f5",borderRadius:'20px'}}
+                                    columns={[
+                                        {title: 'ID', field: 'SupItemID'},
+                                        {title: 'item name', field: 'ItemName'},
+                                        {title: 'price', field: 'Price'},
+                                        {title: 'Available quantity', field: 'qty'}
+                                    ]}
+                                    data={
+                                        items
+                                    }
+                                    actions={[
+                                        {
+                                            icon: 'edit',
+                                            tooltip: 'Edit hall data',
+                                            // onClick: (event, rowData) => alert("You saved " + rowData.name)
+                                        },
+
+                                        {
+                                            icon: 'delete',
+                                            tooltip: 'Delete hall',
+
+                                        }
+                                    ]}
+                                    // components={{
+                                    //     Container: props => <Paper {...props} elevation={0}/>,
+                                    //     Action:
+                                    //         props => {
+                                            //     if (props.action.icon === 'edit') {
+                                            //         return (
+                                            //             <button
+                                            //                 className="MuiButtonBase-root
+                                            //     MuiIconButton-root MuiIconButton-colorInherit"
+                                            //                 tabIndex="0"
+                                            //                 type="button"
+                                            //                 title="Edit Hall"
+                                            //                 onClick={(event, rowData) => {
+                                            //                     history.push({
+                                            //                         pathname: '/halls/edit-hall/' + props.data.id,
+                                            //                         state: props.data
+                                            //                     });
+                                            //                     console.log(props.data);
+                                            //                 }}
+                                            //             >
+                                            //     <span className="MuiIconButton-label">
+                                            //         <span className="material-icons MuiIcon-root"
+                                            //               aria-hidden="true">
+                                            //             edit
+                                            //         </span>
+                                            // </span>
+                                            //                 <span className="MuiTouchRipple-root"></span>
+                                            //             </button>
+                                            //         )
+                                            //     }
+                                            //     if (props.action.icon === 'delete') {
+                                            //         return (
+                                            //             <button
+                                            //                 className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
+                                            //                 tabIndex="0"
+                                            //                 type="button"
+                                            //                 title="Delete Hall"
+                                            //                 onClick={(event, rowData) => deleteHall(props)}
+                                            //             >
+                                            //     <span
+                                            //         className="MuiIconButton-label">
+                                            //         <span className="material-icons MuiIcon-root"
+                                            //               aria-hidden="true">
+                                            //             delete
+                                            //         </span>
+                                            //     </span>
+                                            //                 <span className="MuiTouchRipple-root"></span>
+                                            //             </button>
+                                            //         )
+                                            //     }
+                                            // }
+
+                                    // }}
+
+                                    options={{
+                                        actionsColumnIndex: -1,
+                                        headerStyle: {
+                                            backgroundColor: "#cae3f5",
+                                            textAlign: "left",
+                                        },
+                                        tableLayout: 'auto',
+                                        exportButton: false,
+                                        sorting: true,
+                                        pageSize: 6,
+                                        pageSizeOptions: [6],
+                                        showTitle: false,
+                                        toolbarButtonAlignment: 'left',
+                                    }}
+
+                                />
+                            </div>
+                        </div>
                     </div>
-                </div>
-                </div>
-                <div className="column right" style={{backgroundColor:'#aaa'}}>
-                    <h2>Column 2</h2>
                 </div>
             </div>
 
         </div>
+                )}
+            </Formik>
+        </>
     );
-}
+};
+export default withRouter(AddItems);
