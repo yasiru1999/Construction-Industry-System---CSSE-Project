@@ -4,7 +4,7 @@ import {useLocation} from "react-router-dom";
 export const SideBarDataForAccountant = [
     {
         title: 'Purchase Order Request',
-        path: '/purchaseOrder'
+        path: '/purchaseOrders'
     },
     {
         title: 'Supplier Request',

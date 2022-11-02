@@ -87,10 +87,10 @@ export const Employees = () => {
                         columns={[
                             { title: 'id', field: 'id', hidden: true },
                             { title: 'Name', field: 'employeeName' },
-                            { title: 'DateOfBirth', field: 'dateOfBirth' },
-                            { title: 'PermanentAddress', field: 'permanentAddress' },
-                            { title: 'NationalID', field: 'nationalID' },
-                            { title: 'PhoneNumber', field: 'phoneNumber' },
+                            { title: 'Date of Birth', field: 'dateOfBirth' },
+                            { title: 'Permanent Address', field: 'permanentAddress' },
+                            { title: 'National ID', field: 'nationalID' },
+                            { title: 'Phone Number', field: 'phoneNumber' },
                             { title: 'Email', field: 'email' },
 
                         ]}

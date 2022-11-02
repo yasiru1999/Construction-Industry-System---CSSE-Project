@@ -129,7 +129,7 @@ export const EditEmployee = (props)=>{
                 phoneNumber: values.phoneNumber,
                 email: values.email,
             }
-            console.log("asdasdsdsad")
+            console.log(values.dateOfBirth)
 
             axios.put('http://localhost:8070/employees', employee)
                 .then(response => {
@@ -209,10 +209,18 @@ export const EditEmployee = (props)=>{
                         
                         <TextField
                             fullWidth
+                            // id="dateOfBirth"
+                            // name="dateOfBirth"
+                            // label="DateOfBirth"
+                            // multiline
                             id="dateOfBirth"
-                            name="dateOfBirth"
-                            label="DateOfBirth"
-                            multiline
+                         label="Birthday"
+                         type="date"
+                        //  defaultValue="2017-05-24"
+                         sx={{ width: 220 }}
+                         InputLabelProps={{
+                         shrink: true,
+                           }}
                             value={formik.values.dateOfBirth}
                             onChange={formik.handleChange}
                             /*error={formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)}
@@ -261,13 +269,14 @@ export const EditEmployee = (props)=>{
                         />
 
                         <SubmitButton
+                        type="submit"
                             style={{
                                 float: 'right',
                                 marginTop: '10px',
                                 backgroundColor: '#5a2360',
                                 fontFamily: 'Josefin Sans'
                             }}
-                            type="submit"
+                            
                         >
                            Save Changes
                         </SubmitButton>
