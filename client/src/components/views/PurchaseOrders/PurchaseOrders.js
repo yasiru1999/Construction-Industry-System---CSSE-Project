@@ -1,109 +1,82 @@
-// import React, {useEffect, useState} from 'react';
-// import { useHistory } from 'react-router-dom';
-// import MaterialTable from 'material-table';
-// import {Button, Icon, Link, Paper} from "@material-ui/core";
-// import axios from "axios";
+import React, {useEffect, useState} from 'react';
+import { useHistory } from 'react-router-dom';
+import MaterialTable from 'material-table';
+import {Button, Icon, Link, Paper} from "@material-ui/core";
+import axios from "axios";
 
-// export const PurchaseOrders = () => {
+export const PurchaseOrders = () => {
 
-//     const history = useHistory();
+    const history = useHistory();
 
-//     const [purchaseOrders,setPurchaseOrders] = useState([]);
+    const [purchaseOrders,setPurchaseOrders] = useState([]);
 
-//     useEffect(() => {
-//         axios.get('http://localhost:8070/purchaseOrders').
-//         then((response) => {
-//             if(response.data.success) {
-//                 console.log(response.data.purchaseOrders);
-//                 setPurchaseOrders(response.data.purchaseOrders.map((item) => ({
+    useEffect(() => {
+        axios.get('http://localhost:8070/purchaseOrders').
+        then((response) => {
+            if(response.data.success) {
+                console.log(response.data.purchaseOrders);
+                setPurchaseOrders(response.data.purchaseOrders.map((item) => ({
 
-//                     orderId: item.orderId,
-//                     itemName: item.itemName,
-//                     quantity: item.quantity,
-//                     status: item.status,
-//                     approver: item.approver,
+                    orderId: item.orderId,
+                    itemName: item.itemName,
+                    quantity: item.quantity,
+                    status: item.status,
+                    approver: item.approver,
 
-//                 })));
-//                 setTimeout(console.log(purchaseOrders),3000)
-//             } else{
-//                 alert('An error occurred while retrieving data');
-//                 console.log(response.data.error);
-//             }
-//         })
-//     },[])
+                })));
+                setTimeout(console.log(purchaseOrders),3000)
+            } else{
+                alert('An error occurred while retrieving data');
+                console.log(response.data.error);
+            }
+        })
+    },[])
 
-//     const deletePurchaseOrder = async (props) => {
-
-//         console.log(props.data.id);
-
-//         const id = props.data.id;
-
-//         await axios.delete('http://localhost:8070/purchaseOrders/' + id).
-//         then((response) => {
-            
-//             if(response.data.success) {
-//                 alert('Purchase Order Deleted Successfully');
-//                 window.location.reload(false);
-//             } else{
-//                 alert('An error occurred while deleting data');
-//                 console.log(response.data.error);
-//             }
-//         })
-//     }
-
-//     const updatePurchaseOrder = async (props) => {
-            
-//             console.log(props.data.id);
+   
     
-//             const id = props.data.id;
+    return (
+       
+        <div className={'main-container-tables'}
+        style={{
+            display:"grid",
+            gridTemplateColumns:"1fr 3fr"
+        }}
+        >
+            <p>----------------------</p> 
+            <div className={'table-container'}
+            
+            >
+                <MaterialTable
+                    title="Add employees"
+                    columns={[
+                        { title: 'id', field: 'id', hidden: true },
+                        { title: 'Order Id', field: 'orderId' },
+                        { title: 'Item Name', field: 'itemName' },
+                        { title: 'Quantity', field: 'quantity' },
+                        { title: 'Status', field: 'status' },
+                        { title: 'Approver', field: 'approver' },
+
+                    ]}
+                    data={
+                        purchaseOrders
+                    }
+                    
+                    options={{
+                        actionsColumnIndex: -1,
+                        tableLayout: 'auto',
+                        //exportButton: true,
+                        sorting: true,
+                        pageSize: 6,
+                        pageSizeOptions: [6],
+                        showTitle: false,
+                        toolbarButtonAlignment: 'left',
+                    }}
+                />
+            </div>
+        </div>
     
-//             await axios.put('http://localhost:8070/purchaseOrders/' + id).
-//             then((response) => {
-                
-//                 if(response.data.success) {
-//                     alert('Purchase Order Updated Successfully');
-//                     window.location.reload(false);
-//                 } else{
-//                     alert('An error occurred while updating data');
-//                     console.log(response.data.error);
-//                 }
-//             })
-//         }
+);
+};
 
-//     const columns = [
-//         {title: 'Order ID', field: 'orderId'},
-//         {title: 'Item Name', field: 'itemName'},
-//         {title: 'Quantity', field: 'quantity'},
-//         {title: 'Status', field: 'status'},
-//         {title: 'Approver', field: 'approver'},
-//     ]
 
-//     return (
-//         <div>
-//             <Paper elevation={3} style={{padding: 20, margin: 20}}>
-//                 <MaterialTable
-//                     title="Purchase Orders"
-//                     columns={columns}
-//                     data={purchaseOrders}
-//                     actions={[
-//                         {
-//                             icon: 'delete',
-//                             tooltip: 'Delete Purchase Order',
-//                             onClick: (event, rowData) => deletePurchaseOrder(rowData)
-//                         },
-//                         {
-//                             icon: 'edit',
-//                             tooltip: 'Update Purchase Order',
-//                             onClick: (event, rowData) => updatePurchaseOrder(rowData)
-//                         }
-//                     ]}
-//                     options={{
-//                         actionsColumnIndex: -1
-//                     }}
-//                 />
-//             </Paper>
-//         </div>
-//     )
-// }
 
-// /

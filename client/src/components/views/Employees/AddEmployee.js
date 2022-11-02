@@ -126,17 +126,26 @@ export const AddEmployee = () => {
                         />
                         
 
+                        <div style={{
+                            paddingTop: '1rem',
+                        }}>
                         <TextField
-                            fullWidth
-                            id="dateOfBirth"
-                            name="dateOfBirth"
-                            label="DateOfBirth"
-                            multiline
-                            value={formik.values.dateOfBirth}
+                        fullWidth
+                         id="dateOfBirth"
+                         label="Birthday"
+                         type="date"
+                        //  defaultValue="2017-05-24"
+                         sx={{ width: 220 }}
+                         InputLabelProps={{
+                         shrink: true,
+                           }}
+                           value={formik.values.date}
                             onChange={formik.handleChange}
-                            /*error={formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)}
-                            helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}*/
-                        />
+                            error={formik.touched.date && Boolean(formik.errors.date)}
+                            helperText={formik.touched.date && formik.errors.date}
+
+      />
+                            </div> 
                         <TextField
                             fullWidth
                             id="permanentAddress"
