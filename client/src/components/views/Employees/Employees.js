@@ -78,7 +78,7 @@ export const Employees = () => {
     return (
         <div className={'content'}>
             <div className={'dashboard-header'}>
-                Add Employees
+                Employees Details
             </div>
             <div className={'main-container-tables'}>
                 <div className={'table-container'}>

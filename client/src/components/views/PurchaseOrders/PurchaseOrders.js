@@ -35,14 +35,18 @@ export const PurchaseOrders = () => {
    
     
     return (
+        <div className={'content'}>
+            <div className={'dashboard-header'}>
+               Purchase Order Request List
+            </div>
        
         <div className={'main-container-tables'}
-        style={{
-            display:"grid",
-            gridTemplateColumns:"1fr 3fr"
-        }}
+        // style={{
+        //     display:"grid",
+        //     gridTemplateColumns:"1fr 3fr"
+        // }}
         >
-            <p>----------------------</p> 
+            {/* <p>----------------------</p>  */}
             <div className={'table-container'}
             
             >
@@ -73,6 +77,7 @@ export const PurchaseOrders = () => {
                     }}
                 />
             </div>
+        </div>
         </div>
     
 );
