@@ -4,11 +4,11 @@ import {useLocation} from "react-router-dom";
 export const SideBarDataForAccountant = [
     {
         title: 'Purchase Order Request',
-        path: '/'
+        path: '/purchaseOrder/orderbyId'
     },
     {
         title: 'Supplier Request',
-        path: '/'
+        path: '/login'
 
     },
     {
