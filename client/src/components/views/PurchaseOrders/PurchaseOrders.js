@@ -7,6 +7,7 @@ import axios from "axios";
 export const PurchaseOrders = () => {
 
     const history = useHistory();
+    
 
     const [purchaseOrders,setPurchaseOrders] = useState([]);
    
@@ -28,8 +29,10 @@ export const PurchaseOrders = () => {
                         borderRadius: 35,
                         backgroundColor: '#326ad9',
                         fontFamily: 'Roboto',
-                        color: 'white',                         
+                        color: 'white',
+                        padding: '5px 20px',                         
                               }}
+                              
                     onClick={()=> buttonOnClickFunction(item.orderId)}>Select </button>
 
                 })));
@@ -42,8 +45,7 @@ export const PurchaseOrders = () => {
     },[])
 
   const buttonOnClickFunction = (event) => {
-    console.log(event);
-
+    history.push(`/purchaseOrder/orderbyId`);
   }
     
     return (
