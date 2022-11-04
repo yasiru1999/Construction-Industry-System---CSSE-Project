@@ -4,7 +4,7 @@ import {useLocation} from "react-router-dom";
 export const SideBarDataForSupliers = [
     {
         title: 'Suppliers orders',
-        path: '/'
+        path: '/orders'
     },
     {
         title: 'Add Items',
