@@ -7,14 +7,15 @@ import axios from "axios";
 export const PurchaseOrders = () => {
 
     const history = useHistory();
+    
 
     const [purchaseOrders,setPurchaseOrders] = useState([]);
-
+   
     useEffect(() => {
         axios.get('http://localhost:8070/purchaseOrder/get-all').
         then((response) => {
             if(response.data.success) {
-                console.log(response.data.purchaseOrder);
+                // console.log(response.data.purchaseOrder);
                 setPurchaseOrders(response.data.purchaseOrder.map((item) => ({
 
                     orderId: item.orderId,
@@ -22,9 +23,19 @@ export const PurchaseOrders = () => {
                     quantity: item.quantity,
                     // status: item.status,
                     approver: item.approver,
-
+                    action : <button
+                    style={{
+                        textTransform: 'none',
+                        borderRadius: 35,
+                        backgroundColor: '#326ad9',
+                        fontFamily: 'Roboto',
+                        color: 'white',
+                        padding: '5px 20px',                         
+                              }}
+                              
+                    onClick={()=> buttonOnClickFunction(item._id)}>Select </button>
                 })));
-                setTimeout(console.log(purchaseOrders),3000)
+                // setTimeout(console.log(purchaseOrders),3000)
             } else{
                 alert('An error occurred while retrieving data');
                 console.log(response.data.error);
@@ -32,7 +43,9 @@ export const PurchaseOrders = () => {
         })
     },[])
 
-   
+  const buttonOnClickFunction = (event) => {
+    history.push(`/purchaseOrderbyId/${event}`);
+  }
     
     return (
         <div className={'content'}>
@@ -51,7 +64,6 @@ export const PurchaseOrders = () => {
             
             >
                 <MaterialTable
-                    title="Add employees"
                     style={{backgroundColor:"#cae3f5",borderRadius:'20px'}}
                     columns={[
                         { title: 'id', field: 'id', hidden: true },
@@ -60,7 +72,10 @@ export const PurchaseOrders = () => {
                         { title: 'Quantity', field: 'quantity' },
                         // { title: 'Status', field: 'status' },
                         { title: 'Approver', field: 'approver' },
+                        { title: 'Actions', field: 'action' },
+                   
 
+                      
                     ]}
                     data={
                         purchaseOrders

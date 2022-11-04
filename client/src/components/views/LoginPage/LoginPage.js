@@ -44,6 +44,7 @@ function LoginPage(props) {
                         window.localStorage.setItem('userId', response.data.userId);
                         window.localStorage.setItem('name', response.data.name);
                           window.localStorage.setItem('role', response.data.Role);
+                          window.localStorage.setItem('supID', response.data.SupID);
                         props.history.push("/RoomReservation");
                       } else {
                         setFormErrorMessage('Check out your Account or Password again')

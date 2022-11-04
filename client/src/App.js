@@ -7,6 +7,10 @@ import {LandingDashBoard} from "./components/views/LandingDashBoard/LandingDashB
 import Login from "./components/views/LoginPage/LoginPage";
 import Register from "./components/views/RegisterPage/RegisterPage"
 import AddItems from "./components/views/Suppliers/AddItems"
+import {ViewSupplierOrders} from "./components/views/Suppliers/ViewSupplierOrders";
+import {ViewSupplyOrder} from "./components/views/Suppliers/ViewSupplyOrder";
+import updateItems from "./components/views/Suppliers/updateItems";
+
 import {Employees} from "./components/views/Employees/Employees";
 import {AddEmployee} from "./components/views/Employees/AddEmployee";
 import {EditEmployee} from "./components/views/Employees/EditEmployee";
@@ -30,6 +34,10 @@ function App() {
                     <Route path='/login' exact component={Login} />
                     <Route path='/register' exact component={Register} />
                     <Route path='/addItems' exact component={AddItems} />
+                    <Route path='/orders' exact component={ViewSupplierOrders} />
+                    <Route path='/order' exact component={ViewSupplyOrder} />
+                    <Route path='/updateItem' exact component={updateItems} />
+
 
                     <Route path='/employees' exact component={Employees} />
                     <Route path='/employees/add-employee' exact component={AddEmployee} />
@@ -37,7 +45,7 @@ function App() {
 
                     <Route path='/sites/add-site' exact component={AddSite} />
 
-                    <Route path="/purchaseOrder/orderbyId" exact component={OrderDetail} />
+                    <Route path="/purchaseOrderbyId/:id" exact component={OrderDetail} />
 
 
                     <Route path='/purchaseOrders' exact component={PurchaseOrders} />

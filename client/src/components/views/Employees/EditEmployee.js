@@ -38,7 +38,7 @@ const SubmitButton = styled.button`
 `;
 export const EditEmployee = (props)=>{
     const [isLoading,setIsLoading] = useState(true);
-    const [name,setName] = useState('');
+    const [employeeName,setEmployeeName] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [permanentAddress, setPermanentAddress] = useState('');
     const [nationalID, setNationalID] = useState('');
@@ -49,6 +49,10 @@ export const EditEmployee = (props)=>{
     const history = useHistory();
     const data = history.location.state;
 
+    // const initialFormState = {
+    //     birthday: Date.now(),
+    //   };
+
     useEffect( () => {
         const fetchData = async () => {
             await axios.get('http://localhost:8070/employees/'+props.match.params.id)
@@ -58,7 +62,7 @@ export const EditEmployee = (props)=>{
                 console.log(" response data" ,response.data.employee);
                 const data = response.data.employee;
 
-                setName(data.employeeName);
+                setEmployeeName(data.employeeName);
                 setDateOfBirth(data.dateOfBirth);
                 setPermanentAddress(data.permanentAddress);
                 setNationalID(data.nationalID);
@@ -77,15 +81,9 @@ export const EditEmployee = (props)=>{
 
     },[])
     const validationSchema = yup.object({
-        name: yup
+        employeeName: yup
             .string('Enter employee name')
             .required('Name is required'),
-        type: yup
-            .string('Select employee type')
-            .required('Type is required'),
-        gender: yup
-            .string('Select gender type')
-            .required('Gender is required'),
         dateOfBirth: yup
             .string('Enter the date of birth')
             .required('Date of birth is required'),
@@ -106,7 +104,7 @@ export const EditEmployee = (props)=>{
     const formik = useFormik({
         initialValues: {
             _id: id,
-            name: name,
+            employeeName: employeeName,
             dateOfBirth: dateOfBirth,
             permanentAddress: permanentAddress,
             nationalID: nationalID,
@@ -121,8 +119,6 @@ export const EditEmployee = (props)=>{
             const employee = {
                 _id: id,
                 employeeName: values.name,
-                type: values.type,
-                gender: values.gender,
                 dateOfBirth: values.dateOfBirth,
                 permanentAddress: values.permanentAddress,
                 nationalID: values.nationalID,
@@ -196,13 +192,13 @@ export const EditEmployee = (props)=>{
                     <form onSubmit={formik.handleSubmit}>
                         <TextField
                             fullWidth
-                            id="name"
-                            name="name"
+                            id="employeeName"
+                            name="employeeName"
                             label="Name"
-                            value={formik.values.name}
+                            value={formik.values.employeeName}
                             onChange={formik.handleChange}
-                            error={formik.touched.name && Boolean(formik.errors.name)}
-                            helperText={formik.touched.name && formik.errors.name}
+                            error={formik.touched.employeeName && Boolean(formik.errors.employeeName)}
+                            helperText={formik.touched.employeeName && formik.errors.employeeName}
                         />
                        
                         <br/>
@@ -210,21 +206,21 @@ export const EditEmployee = (props)=>{
                         <TextField
                             fullWidth
                             // id="dateOfBirth"
-                            // name="dateOfBirth"
+                            name="dateOfBirth"
                             // label="DateOfBirth"
                             // multiline
                             id="dateOfBirth"
                          label="Birthday"
-                         type="date"
+                        //  type="date"
                         //  defaultValue="2017-05-24"
                          sx={{ width: 220 }}
                          InputLabelProps={{
                          shrink: true,
                            }}
                             value={formik.values.dateOfBirth}
-                            onChange={formik.handleChange}
-                            /*error={formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)}
-                            helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}*/
+                            onChange={(value) => formik.setFieldValue('dateOfBirth', value, true)}
+                            error={formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)}
+                            helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
                         />
                         <TextField
                             fullWidth

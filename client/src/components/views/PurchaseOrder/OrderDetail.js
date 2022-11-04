@@ -1,18 +1,80 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { withRouter, useParams } from 'react-router-dom';
 import './PurchaseOrder.css'
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { useDispatch } from "react-redux";
-import axios from "axios";
+//import { Formik } from 'formik';
+//import * as Yup from 'yup';
+//import { useDispatch } from "react-redux";
+import axios from 'axios';
 
 function OrderDetail(props) {
 
-    const [noticeList, setNoticeList] = useState([]);
+    const {id} = useParams(""); 
+
+    const [PoList, setPoList] = useState({
+        orderId:"", itemName:"", quantity:"", approver:"", siteName:"", siteManager:"", siteContactNo:"",
+        siteAddress:"", approvedQty:"", dueDate:"", priority:"", approvelStatus:"", comment:"", condition:"",
+        deliveryStatus:"", supCompany:"", supName:"", supContact:"", supAddress:""});
+
+    const [PoListUpdate, setPoListUpdate] = useState({
+        orderId:"", itemName:"", quantity:"", approver:"", siteName:"", siteManager:"", siteContactNo:"",
+        siteAddress:"", approvedQty:"", dueDate:"", priority:"", approvelStatus:"", comment:"", condition:"",
+        deliveryStatus:"", supCompany:"", supName:"", supContact:"", supAddress:""});
+    
+    const [supplierList, setSupplierList] = useState([]);
+    const [supplier, setSupplier] = useState({Price:"", supName:""});
+
+    const totalAmount = supplier.Price * PoList.quantity;
+
+    useEffect(() => {
+        const getDetailsList = async() => {
+            try {
+                const res = await axios.get(`http://localhost:8070/purchaseOrder/get-one/${id}`)
+                setPoList(res.data);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+        getDetailsList()
+    },[]);
+
+    function AssignSupplier(item) {
+        axios.get(`http://localhost:8070/supplyItem/${item}`)
+            .then(res => {
+                console.log(res.data)
+                setSupplierList(res.data)
+            }).catch(err => console.error(err))
+    }
+
+    function SupplierSelect(id) {
+        axios.get(`http://localhost:8070/supplyItem/get/${id}`)
+            .then(res => {
+                console.log(res.data)
+                setSupplier(res.data)
+            }).catch(err => console.error(err))
+    }
+
+    function isApproved(){
+        //e.preventDefault();
+        const ListUpdate = {
+            _id: id,
+            approvedQty:50,
+            approvelStatus: "Approved",
+            supCompany: supplier.supName,
+            supName: supplier.supName,
+            supContact: "0779863015",
+            supAddress: "Colombo 02"
+        }
+        axios.put(`http://localhost:8070/purchaseOrder`, ListUpdate).then(() => {
+            alert("Successfully Approved");
+        }).catch((err) => {
+            alert("Fild to Approved!");
+            alert(err)
+        });
+    }
+
   
   return (
     <div>
- 
         <div className="page">
 
             <center>
@@ -23,7 +85,7 @@ function OrderDetail(props) {
 
                 <div class="column1" >
                     <div className="card2">
-                        <h3 className="topicPoNum">OR001</h3><br/><br/>
+                        <h3 className="topicPoNum">{PoList.orderId}</h3><br/><br/>
 
                         <div class="row">
                             <div class="column2" >
@@ -31,23 +93,23 @@ function OrderDetail(props) {
 
                                 <div class="column22" >
                                     <div className="dataleft22">
-                                        <label>Item Name</label><br/>
+                                        <label>Item</label><br/>
                                         <label>Quantity</label><br/>
                                         <label>Status</label><br/>
                                         <label>Due Date</label><br/>
-                                        <label>Approver</label><br/>
+                                        <label>Approver</label><br/><br/>
                                         <label>Condition</label><br/>
                                     </div>
                                 </div>
 
                                 <div class="column23" >
                                     <div className="dataleft23">
-                                        <label>Cement bags</label><br/>
-                                        <label>30</label><br/>
-                                        <label>Pending</label><br/>
-                                        <label>2022-11-20</label><br/>
-                                        <label>Procument staff</label><br/>
-                                        <label>No Condition</label><br/>
+                                        <label>{PoList.itemName}</label><br/>
+                                        <label>{PoList.quantity}</label><br/>
+                                        <label>{PoList.approvelStatus}</label><br/>
+                                        <label>{PoList.dueDate}</label><br/>
+                                        <label>{PoList.approver}</label><br/>
+                                        <label>{PoList.condition}</label><br/>
                                     </div>
                                 </div>
                                 
@@ -59,7 +121,7 @@ function OrderDetail(props) {
                                 <div class="column24" >
                                     <div className="dataleft22">
                                         <label>Site Name</label><br/>
-                                        <label>Manager Name</label><br/>
+                                        <label>Manager</label><br/>
                                         <label>Contact no</label><br/>
                                         <label>Site Address</label><br/>
                                     </div>
@@ -67,14 +129,15 @@ function OrderDetail(props) {
 
                                 <div class="column25" >
                                     <div className="dataleft23">
-                                        <label>Nova Construction</label><br/>
-                                        <label>A J S Dilshan</label><br/>
-                                        <label>0775630159</label><br/>
-                                        <label>Colombo 03</label><br/>
+                                        <label>{PoList.siteName}</label><br/>
+                                        <label>{PoList.siteManager}</label><br/>
+                                        <label>{PoList.siteContactNo}</label><br/>
+                                        <label>{PoList.siteAddress}</label><br/>
                                     </div>
                                 </div>
                             </div>  
-                            <button className="buttonSup">Assign Supplier</button>          
+                            <button className="buttonSup" onClick={() => AssignSupplier(PoList.itemName)}>Assign Supplier</button> 
+                                                                    
                         </div>
 
                     </div>
@@ -90,23 +153,24 @@ function OrderDetail(props) {
                             <div class="columnR2" >
                                 <div className="card3">
                                     <table>
+                                    <thead className='table-dark'>
                                         <tr>
-                                            <td className="tdPaddings">SP7</td>
-                                            <td className="tdPaddings">Amal</td>
-                                            <td className="tdPaddings">RS 7200</td>
+                                            <th> ID</th>
+                                            <th className='tablegap'> Name </th>
+                                            <th> Price</th>
                                         </tr>
-
-                                        <tr>
-                                            <td className="tdPaddings">SP8</td>
-                                            <td className="tdPaddings">Dilshan</td>
-                                            <td className="tdPaddings">RS 5200</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td className="tdPaddings">SP9</td>
-                                            <td className="tdPaddings">Sunul</td>
-                                            <td className="tdPaddings">RS 7400</td>
-                                        </tr>
+                                    </thead>
+                                        <tbody className='table-group-divider'>
+                                        {
+                                            supplierList.map((detail, id) => (
+                                                <tr key={id} onClick={() => SupplierSelect(detail.supID)}>
+                                                    <td>{detail.supID}</td>
+                                                    <td className='tablegap'>{detail.supName}</td>
+                                                    <td>Rs. {detail.Price}</td>                      
+                                                </tr>
+                                            ))
+                                        }
+                                        </tbody>
                                     </table>
                                 </div>
                                 
@@ -121,18 +185,18 @@ function OrderDetail(props) {
                                         <label>Site budget allocation</label><br/>
                                     </div>
                                 </div>
-
+                                            
                                 <div class="columnR25" >
                                     <div className="dataleft23">
-                                        <label>30 X 5200</label><br/>
-                                        <label>Rs 1500000</label><br/><br/>
+                                        <label>{PoList.quantity} X {supplier.Price}</label><br/>
+                                        <label>Rs {totalAmount}</label><br/><br/>
                                         <label>Rs 1000000</label><br/>
                                     </div>
                                 </div>
                             </div>  
                             <button className="buttonPaAp">Partially Approved</button>       
                             <button className="buttonRej">Reject</button> 
-                            <button className="buttonAp">Approved</button>    
+                            <button className="buttonAp" onClick={() => isApproved()}>Approved</button>    
                         </div>
 
                     </div>
