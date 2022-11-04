@@ -1,6 +1,5 @@
 const PurchaseOrder = require('../models/purchaseOrder.model');
 
-
 const getPurchaseOrder = async(request,response) => {
     try {
         PurchaseOrder.findById(request.params.id, (error, data) => {
@@ -52,8 +51,28 @@ const getPurchaseOrders = async (request, response) => {
     }
 }
 
+const addPurchaseOrder = async (request, response) => {
+
+    const Order = new PurchaseOrder(request.body);
+
+    await Order.save((error, Order) => {
+        if(error){
+            response.status(500).json({ error: error.message });
+            console.log(error.message)
+        }
+        else{
+            response.status(200).
+            json({
+                success: true,
+                Order: Order
+            })
+        }
+    });
+}
+
 module.exports = {
     getPurchaseOrder,
     getPurchaseOrders,
-    getAllPurchaseOrders
+    getAllPurchaseOrders,
+    addPurchaseOrder
 }
