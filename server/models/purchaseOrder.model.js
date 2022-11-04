@@ -83,9 +83,10 @@ const purchaseOrderSchema = new Schema({
     supAddress : {
       type : String,
       default : 'Not Assigned'
-    }
+    },
+    supID : {type : String, default : 'Not Assigned'},
 
-    
+    totalPrice : {type : Number, default : 0}
     
 }, {
     timestamps: true,
