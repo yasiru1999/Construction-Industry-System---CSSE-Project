@@ -61,6 +61,9 @@ function AddItems(props) {
     const [SelectedItem,setSelectedItem] = useState('');
     const [isLoading,setIsLoading] = useState(true);
     const [items,setItems] = useState([]);
+    let id = localStorage.getItem('supID');
+    const [supID,setSupID] = useState(id);
+    let supName = localStorage.getItem('name');
 
     useEffect(() => {
         axios.get('http://localhost:8070/supplyItem').
@@ -81,24 +84,7 @@ function AddItems(props) {
             }
         })
     },[])
-
-    const deleteHall = async (props) => {
-
-        const id = props.data.id;
-
-        await axios.delete('http://localhost:8070/supplyItem/' + id).
-        then((response) => {
-            if(response.data.success){
-                alert("Successfully deleted.");
-            }else {
-                alert('An error happened');
-                console.log(response.data.error);
-            }
-        }).catch((error) => {
-            console.log(error);
-        })
-    }
-
+    
     return  (
         <>
             {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
@@ -108,7 +94,9 @@ function AddItems(props) {
                     SupItemID: "",
                     ItemName: "",
                     Price: "",
-                    qty: ""
+                    qty: "",
+                    supID:"",
+                    supName:""
             }}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
@@ -116,7 +104,9 @@ function AddItems(props) {
                             SupItemID: values.SupItemID,
                             ItemName: SelectedItem.value,
                             Price: values.Price,
-                            qty: values.qty
+                            qty: values.qty,
+                            supID: supID.value,
+                            supName:supName.value
                         };
 
                         axios.post('http://localhost:8070/supplyItem/add', dataToSubmit)
