@@ -14,6 +14,8 @@ function OrderDetail(props) {
         orderId:"", itemName:"", quantity:"", approver:"", siteName:"", siteManager:"", siteContactNo:"",
         siteAddress:"", approvedQty:"", dueDate:"", priority:"", approvelStatus:"", comment:"", condition:"",
         deliveryStatus:"", supCompany:"", supName:"", supContact:"", supAddress:""});
+    
+    const [supplierList, setSupplierList] = useState([]);
 
     useEffect(() => {
         const getDetailsList = async() => {
@@ -26,6 +28,14 @@ function OrderDetail(props) {
         }
         getDetailsList()
     },[]);
+
+    function AssignSupplier(item) {
+        axios.get(`http://localhost:8070/supplyItem/${item}`)
+            .then(res => {
+                console.log(res.data)
+                setSupplierList(res.data)
+            }).catch(err => console.error(err))
+    }
   
   return (
     <div>
@@ -90,7 +100,8 @@ function OrderDetail(props) {
                                     </div>
                                 </div>
                             </div>  
-                            <button className="buttonSup">Assign Supplier</button>          
+                            <button className="buttonSup" onClick={() => AssignSupplier(PoList.itemName)}>Assign Supplier</button> 
+                                                                    
                         </div>
 
                     </div>
@@ -106,23 +117,18 @@ function OrderDetail(props) {
                             <div class="columnR2" >
                                 <div className="card3">
                                     <table>
-                                        <tr>
-                                            <td className="tdPaddings">SP7</td>
-                                            <td className="tdPaddings">Amal</td>
-                                            <td className="tdPaddings">RS 7200</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td className="tdPaddings">SP8</td>
-                                            <td className="tdPaddings">Dilshan</td>
-                                            <td className="tdPaddings">RS 5200</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td className="tdPaddings">SP9</td>
-                                            <td className="tdPaddings">Sunul</td>
-                                            <td className="tdPaddings">RS 7400</td>
-                                        </tr>
+                                        <tbody className='table-group-divider'>
+                                        {
+                                            supplierList.map((detail, id) => (
+                                                <tr key={id}>
+                                                    <td>{detail.qty}</td>
+                                                    <td>{detail.nic}</td>
+                                                    <td>{detail.accNo}</td>
+                                                    <td>{detail.balance}</td>                        
+                                                </tr>
+                                            ))
+                                        }
+                                        </tbody>
                                     </table>
                                 </div>
                                 
