@@ -121,6 +121,31 @@
     width: 100%;
 
 }
+
+.colum3 {
+    float: left;
+    padding: 10px;
+    height: 120px; /* Should be removed. Only for demonstration */
+}
+
+.colSide1 {
+    width: 30%;
+}
+
+.colSide2 {
+    width: 30%;
+    margin-left: 20px;
+}
+.colSide3{
+    width: 30%;
+}
+
+/* Clear floats after the columns */
+.row3:after {
+    content: "";
+    display: table;
+    clear: both;
+}
 .itemName{
     height:40px;
     font-size: 15px;
@@ -137,7 +162,6 @@
     border-radius: 15px;
     font-size: 14px;
     padding: 10px;
-
     margin-top: 1vh;
     margin-left: 70px;
 }
@@ -152,6 +176,25 @@
     display: flex;
     margin-top: 1vh;
 
+}
+.main-container-tables4{
+    width: 88%;
+    height: 70%;
+    background-color: #cae3f5;
+    float: left;
+    border-radius: 15px;
+    border: 1px solid black;
+    font-size: 14px;
+    padding: 10px;
+    margin-top: 1vh;
+    margin-left: 70px;
+}
+.searchBar{
+    float: right;
+    border-radius: 15px;
+    height: 30px;
+    width: 200px;
+    padding: 10px;
 }
 .table-container2{
     width: 100%;
@@ -202,4 +245,56 @@
     text-align: center;
     float: right;
     margin-top: 70px;
+}
+.selectBtn2{
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+    background-color: #72fca9;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    margin-top: 0px;
+}
+.selectBtn3{
+    width: 140px;
+    height: 40px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+    background-color: #54b9ff;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    margin-top: 0px;
+}
+.selectBtn4{
+    width: 70%;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #FFFFFF;
+    background-color: #ec5f5f;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    margin-left: 60px;
+}
+.inputFieldStatus{
+    width: 150px;
+    border-radius: 15px;
 }
