@@ -41,7 +41,7 @@ function App() {
 
                     <Route path='/sites/add-site' exact component={AddSite} />
 
-                    <Route path="/purchaseOrder/orderbyId" exact component={OrderDetail} />
+                    <Route path="/purchaseOrderbyId/:id" exact component={OrderDetail} />
 
 
                     <Route path='/purchaseOrders' exact component={PurchaseOrders} />
