@@ -34,7 +34,6 @@ export const PurchaseOrders = () => {
                               }}
                               
                     onClick={()=> buttonOnClickFunction(item._id)}>Select </button>
-
                 })));
                 // setTimeout(console.log(purchaseOrders),3000)
             } else{
