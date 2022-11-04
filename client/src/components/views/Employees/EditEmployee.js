@@ -49,6 +49,10 @@ export const EditEmployee = (props)=>{
     const history = useHistory();
     const data = history.location.state;
 
+    // const initialFormState = {
+    //     birthday: Date.now(),
+    //   };
+
     useEffect( () => {
         const fetchData = async () => {
             await axios.get('http://localhost:8070/employees/'+props.match.params.id)
@@ -207,14 +211,14 @@ export const EditEmployee = (props)=>{
                             // multiline
                             id="dateOfBirth"
                          label="Birthday"
-                         type="date"
+                        //  type="date"
                         //  defaultValue="2017-05-24"
                          sx={{ width: 220 }}
                          InputLabelProps={{
                          shrink: true,
                            }}
                             value={formik.values.dateOfBirth}
-                            onChange={formik.handleChange}
+                            onChange={(value) => formik.setFieldValue('dateOfBirth', value, true)}
                             error={formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)}
                             helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
                         />

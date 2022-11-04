@@ -54,7 +54,8 @@ router.post("/login", (req, res) => {
                         loginSuccess: true,
                         userId: user._id,
                         name: user.name,
-                        Role: user.Role
+                        Role: user.Role,
+                        SupID: user.SupID
                     });
             });
         });
