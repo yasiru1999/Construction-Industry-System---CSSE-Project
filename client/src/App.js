@@ -9,6 +9,7 @@ import Register from "./components/views/RegisterPage/RegisterPage"
 import AddItems from "./components/views/Suppliers/AddItems"
 import {ViewSupplierOrders} from "./components/views/Suppliers/ViewSupplierOrders";
 import {ViewSupplyOrder} from "./components/views/Suppliers/ViewSupplyOrder";
+import updateItems from "./components/views/Suppliers/updateItems";
 import {Employees} from "./components/views/Employees/Employees";
 import {AddEmployee} from "./components/views/Employees/AddEmployee";
 import {EditEmployee} from "./components/views/Employees/EditEmployee";
@@ -34,6 +35,7 @@ function App() {
                     <Route path='/addItems' exact component={AddItems} />
                     <Route path='/orders' exact component={ViewSupplierOrders} />
                     <Route path='/order' exact component={ViewSupplyOrder} />
+                    <Route path='/updateItem' exact component={updateItems} />
 
                     <Route path='/employees' exact component={Employees} />
                     <Route path='/employees/add-employee' exact component={AddEmployee} />

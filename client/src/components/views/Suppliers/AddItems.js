@@ -54,6 +54,18 @@ const SubmitButton = styled.button`
   }
 `;
 
+async function deletePayment(item) {
+    console.log(item.id);
+    const id = item.id;
+    if(window.confirm('Delete the User?')){
+        await axios.delete(`http://localhost:8070/supplyItem/` + id).
+        then((res)=>{
+        console.log(res)
+
+    });};
+
+}
+
 function AddItems(props) {
 
     const history = useHistory();
@@ -278,8 +290,8 @@ function AddItems(props) {
                                                     <td>
                                                         <center>{item.qty}</center>
                                                     </td>
-                                                    <td><center><button style={{backgroundColor:'#ff9800'}} onClick={() => {history.push({pathname: "/AllUsersUpdate", state:{user:item}})}} ><FaEdit /></button></center></td>
-                                                    {/*<td><center><button style={{backgroundColor:'red'}} onClick={() => {deletePayment(item); window.location.reload()}}><FaTrashAlt /></button></center></td>*/}
+                                                    <td><center><button onClick={() => {history.push({pathname: "/updateItem", state:{item:item}})}} ><FaEdit /></button></center></td>
+                                                    <td><center><button onClick={() => {deletePayment(item); window.location.reload()}}><FaTrashAlt /></button></center></td>
                                                 </tr>
                                             )
                                         })}
