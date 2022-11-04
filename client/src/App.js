@@ -15,6 +15,9 @@ import {EditEmployee} from "./components/views/Employees/EditEmployee";
 
 
 import {AddSite} from "./components/views/Sites/AddSite";
+
+import OrderDetail from "./components/views/PurchaseOrder/OrderDetail";
+
 import {PurchaseOrders} from "./components/views/PurchaseOrders/PurchaseOrders";
 
 
@@ -37,6 +40,9 @@ function App() {
                     <Route path='/employees/edit-employee/:id' exact component={EditEmployee} />
 
                     <Route path='/sites/add-site' exact component={AddSite} />
+
+                    <Route path="/purchaseOrder/orderbyId" exact component={OrderDetail} />
+
 
                     <Route path='/purchaseOrders' exact component={PurchaseOrders} />
 

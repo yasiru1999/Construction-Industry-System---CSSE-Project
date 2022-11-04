@@ -37,12 +37,6 @@ export const AddEmployee = () => {
         /*name: yup
             .string('Enter employee name')
             .required('Name is required'),
-        type: yup
-            .string('Select employee type')
-            .required('Type is required'),
-        gender: yup
-            .string('Select gender type')
-            .required('Gender is required'),
         dateOfBirth: yup
             .string('Enter the date of birth')
             .required('Date of birth is required'),
@@ -192,7 +186,7 @@ export const AddEmployee = () => {
                             style={{
                                 float: 'right',
                                 marginTop: '10px',
-                                backgroundColor: '#5a2360',
+                                backgroundColor: '#326ad9',
                                 fontFamily: 'Josefin Sans'
                             }}
                             type="submit"

@@ -78,12 +78,13 @@ export const Employees = () => {
     return (
         <div className={'content'}>
             <div className={'dashboard-header'}>
-                Add Employees
+                Employees Details
             </div>
             <div className={'main-container-tables'}>
                 <div className={'table-container'}>
                     <MaterialTable
                         title="Add employees"
+                        style={{backgroundColor:"#cae3f5",borderRadius:'20px'}}
                         columns={[
                             { title: 'id', field: 'id', hidden: true },
                             { title: 'Name', field: 'employeeName' },
@@ -182,7 +183,7 @@ export const Employees = () => {
                                                 style={{
                                                     textTransform: 'none',
                                                     borderRadius: 35,
-                                                    backgroundColor: '#5a2360',
+                                                    backgroundColor: '#326ad9',
                                                     fontFamily: 'Roboto',
                                                     color: 'white',                         
                                                           }}
