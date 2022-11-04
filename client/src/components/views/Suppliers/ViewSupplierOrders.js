@@ -21,10 +21,10 @@ export const ViewSupplierOrders = () => {
                 <div className={'main-container-tables2'}>
                     <div className={'viewData'}>
                         <div className="row2">
-                            <div className="column2 col1">
+                            <div className="colum col1">
                                 <img className="imgUser" src={user} />
                             </div>
-                            <div className="column2 col2" >
+                            <div className="colum col2" >
                                 <table id="orders">
                                     <tr>
                                         <td>Order Id</td>
@@ -45,7 +45,7 @@ export const ViewSupplierOrders = () => {
                                 </table>
 
                             </div>
-                            <div className="column2 col3">
+                            <div className="colum col3">
                                 <button className='selectBtn'>Select</button>
                             </div>
                         </div>

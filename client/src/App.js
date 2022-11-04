@@ -33,7 +33,7 @@ function App() {
                     <Route path='/register' exact component={Register} />
                     <Route path='/addItems' exact component={AddItems} />
                     <Route path='/orders' exact component={ViewSupplierOrders} />
-                    <Route path='/order' exact component={ViewSupplierOrders} />
+                    <Route path='/order' exact component={ViewSupplyOrder} />
 
                     <Route path='/employees' exact component={Employees} />
                     <Route path='/employees/add-employee' exact component={AddEmployee} />
