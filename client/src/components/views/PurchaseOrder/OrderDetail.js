@@ -53,8 +53,8 @@ function OrderDetail(props) {
             }).catch(err => console.error(err))
     }
 
-    function isApproved(e){
-        e.preventDefault();
+    function isApproved(){
+        //e.preventDefault();
         const ListUpdate = {
             _id: id,
             approvedQty:50,
