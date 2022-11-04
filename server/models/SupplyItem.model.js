@@ -5,6 +5,8 @@ const SupplyItemSchema = new mongoose.Schema({
     ItemName:{type:String},
     Price:{type:String},
     qty: {type:String},
+    supID: {type:String},
+    supName: {type:String}
 });
 
 const SupplyItems = mongoose.model('SupplyItems', SupplyItemSchema);
