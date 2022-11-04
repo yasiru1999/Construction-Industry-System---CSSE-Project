@@ -8,7 +8,8 @@ module.exports = () => {
     router.get('/', SupplyItemService.getSupllyAllItems);
     router.post('/add', SupplyItemService.addSupplyItem);
     router.put('/:id', SupplyItemService.updateSupplyItem);
-    router.delete('/:id',SupplyItemService.deleteItem)
+    router.delete('/:id',SupplyItemService.deleteItem);
+    router.get('/:item',SupplyItemService.getSupplierByItem);;
 
     return router;
 }

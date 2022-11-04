@@ -5,7 +5,17 @@ const Schema = mongoose.Schema;
 const purchaseOrderSchema = new Schema({
     orderId : {
       type : String,
-      // required: true
+    },
+    itemName : {
+      type : String,
+    },
+
+    quantity : {
+      type : Number,
+    },
+
+    approver : {
+      type : String,
     },
     siteName : {
         type : String,
@@ -23,16 +33,6 @@ const purchaseOrderSchema = new Schema({
         type : String,
         // required: true
     },
-    item : {
-        type : String,
-        // required: true
-    },
-
-    orderQty : {
-        type : Number,
-        // required: true
-    },
-
     approvedQty : {
         type : Number,
         default : 0
@@ -41,11 +41,6 @@ const purchaseOrderSchema = new Schema({
     dueDate : {
         type : String
     },
-
-    approver : {
-      type : String
-    },
-
     priority : {
       type : String
     },
@@ -88,23 +83,9 @@ const purchaseOrderSchema = new Schema({
     supAddress : {
       type : String,
       default : 'Not Assigned'
-    },
-
-    orderId : {
-      type : String,
-    },
-
-    itemName : {
-      type : String,
-    },
-
-    quantity : {
-      type : Number,
-    },
-
-    approver : {
-      type : String,
     }
+
+    
     
 }, {
     timestamps: true,
