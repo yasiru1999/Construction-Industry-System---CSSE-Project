@@ -95,6 +95,22 @@ const getSupplierByItem = async(request,response) => {
     }
 }
 
+const getSupplierByCode = async(request,response) => {
+    try {
+        let code = request.params.code;
+        SupplyItem.findOne({supID: code}, (error, data) => {
+            if (error) {
+                response.status(500).json({error: error.message});
+            } else {
+                response.status(200).json(data)
+            }
+        })
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
 /*router.get("/getAll/:item", async (req, res) => {
     try {
       let module = req.params.module;
@@ -113,6 +129,7 @@ module.exports = {
     getSupllyAllItems,
     updateSupplyItem,
     deleteItem,
-    getSupplierByItem
+    getSupplierByItem,
+    getSupplierByCode
 
 }

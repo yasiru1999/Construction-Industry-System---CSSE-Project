@@ -248,3 +248,8 @@
     transition-duration: 0.4s;
     cursor: pointer;
   }
+
+  .tablegap{
+    padding-left: 35px;
+    padding-right: 35px;
+  }

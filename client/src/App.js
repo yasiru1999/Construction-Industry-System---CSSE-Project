@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import {LandingDashBoard} from "./components/views/LandingDashBoard/LandingDashBoard";
 import Login from "./components/views/LoginPage/LoginPage";
 import Register from "./components/views/RegisterPage/RegisterPage"
-import AddItems from "./components/views/Suppliers/AddItems"
-import {ViewSupplierOrders} from "./components/views/Suppliers/ViewSupplierOrders";
-import {ViewSupplyOrder} from "./components/views/Suppliers/ViewSupplyOrder";
+//import AddItems from "./components/views/Suppliers/AddItems"
+//import {ViewSupplierOrders} from "./components/views/Suppliers/ViewSupplierOrders";
+//import {ViewSupplyOrder} from "./components/views/Suppliers/ViewSupplyOrder";
 import {Employees} from "./components/views/Employees/Employees";
 import {AddEmployee} from "./components/views/Employees/AddEmployee";
 import {EditEmployee} from "./components/views/Employees/EditEmployee";
@@ -31,9 +31,7 @@ function App() {
                     <Route path='/' exact component={LandingDashBoard} />
                     <Route path='/login' exact component={Login} />
                     <Route path='/register' exact component={Register} />
-                    <Route path='/addItems' exact component={AddItems} />
-                    <Route path='/orders' exact component={ViewSupplierOrders} />
-                    <Route path='/order' exact component={ViewSupplyOrder} />
+                    
 
                     <Route path='/employees' exact component={Employees} />
                     <Route path='/employees/add-employee' exact component={AddEmployee} />
