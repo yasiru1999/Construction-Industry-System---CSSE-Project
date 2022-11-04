@@ -23,7 +23,8 @@ export const ViewSupplierOrders = () => {
                     console.log(response.data.purchaseOrder);
                     const order = response.data.purchaseOrder;
                     const FilteredOrders = response.data.purchaseOrder.filter(order =>
-                        order.supID === loggedInSupID
+                        order.supID === loggedInSupID &&
+                        order.approvelStatus === "Approved"
                     )
                     setOrders(FilteredOrders);
                     // setIsLoading(false);
@@ -72,7 +73,14 @@ export const ViewSupplierOrders = () => {
 
                             </div>
                             <div className="colum col3">
-                                <button className='selectBtn'>Select</button>
+                                <button
+                                    className='selectBtn'
+                                    onClick={() => {
+                                        history.push({
+                                            pathname: "/order",
+                                            state:{order:item}
+                                        })}}
+                                >Select</button>
                             </div>
                         </div>
                     </div>

@@ -7,9 +7,9 @@ import { Formik } from 'formik';
 import axios from "axios";
 import styled from "styled-components";
 import "./Suppliers.css"
-import {JumpCircleLoading} from "react-loadingg";
-import MaterialTable from "material-table";
-import {Button, Icon, Paper} from "@material-ui/core";
+import { FaEdit } from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
+
 
 const Items = [
     { value: 'cement', label: 'cement' },
@@ -54,6 +54,18 @@ const SubmitButton = styled.button`
   }
 `;
 
+async function deletePayment(item) {
+    console.log(item.id);
+    const id = item.id;
+    if(window.confirm('Delete the User?')){
+        await axios.delete(`http://localhost:8070/supplyItem/` + id).
+        then((res)=>{
+        console.log(res)
+
+    });};
+
+}
+
 function AddItems(props) {
 
     const history = useHistory();
@@ -61,9 +73,7 @@ function AddItems(props) {
     const [SelectedItem,setSelectedItem] = useState('');
     const [isLoading,setIsLoading] = useState(true);
     const [items,setItems] = useState([]);
-    let id = localStorage.getItem('supID');
-    const [supID,setSupID] = useState(id);
-    let supName = localStorage.getItem('name');
+    const[filter,setFilter] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:8070/supplyItem').
@@ -84,7 +94,7 @@ function AddItems(props) {
             }
         })
     },[])
-    
+
     return  (
         <>
             {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
@@ -99,14 +109,17 @@ function AddItems(props) {
                     supName:""
             }}
                 onSubmit={(values, { setSubmitting }) => {
+                    let id = localStorage.getItem('supID');
+                    let name = localStorage.getItem('name')
                     setTimeout(() => {
+
                         let dataToSubmit = {
                             SupItemID: values.SupItemID,
                             ItemName: SelectedItem.value,
                             Price: values.Price,
                             qty: values.qty,
-                            supID: supID.value,
-                            supName:supName.value
+                            supID:id,
+                            supName:name
                         };
 
                         axios.post('http://localhost:8070/supplyItem/add', dataToSubmit)
@@ -239,102 +252,53 @@ function AddItems(props) {
                 </div>
                 <div className="column right" >
                     <div className={''}>
-                        <div className={'main-container-tables2'}>
+                        <div>
+                            <input
+                                className="searchBar"
+                            onChange={(e) => setFilter(e.target.value)}
+                            placeholder="Search"
+                            />
+                        </div>
+                        <div className={'main-container-tables4'}>
                             <div className={''}>
-                                <MaterialTable
-                                    style={{backgroundColor:"#cae3f5",borderRadius:'20px'}}
-                                    columns={[
-                                        {title: 'ID', field: 'SupItemID'},
-                                        {title: 'item name', field: 'ItemName'},
-                                        {title: 'price', field: 'Price'},
-                                        {title: 'Available quantity', field: 'qty'}
-                                    ]}
-                                    data={
-                                        items
-                                    }
-                                    actions={[
-                                        {
-                                            icon: 'edit',
-                                            tooltip: 'Edit hall data',
-                                            // onClick: (event, rowData) => alert("You saved " + rowData.name)
-                                        },
+                                <div style={{ width:'100%'}}>
+                                    <table style={{ width:'100%'}}>
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Item Name</th>
+                                            <th>Price</th>
+                                            <th>Available Quantity</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {items.filter(items => !filter.length ||
+                                            items.SupItemID.toString().toLowerCase().includes(filter.toString().toLowerCase()) ||
+                                            items.ItemName.toString().toLowerCase().includes(filter.toString().toLowerCase())).
+                                        map((item,key)=>{
+                                            return(
+                                                <tr key = {key}>
+                                                    <td>
+                                                        <center>{item.SupItemID}</center>
+                                                    </td>
+                                                    <td>
+                                                        <center>{item.ItemName}</center>
+                                                    </td>
+                                                    <td>
+                                                        <center>{item.Price}</center>
+                                                    </td>
+                                                    <td>
+                                                        <center>{item.qty}</center>
+                                                    </td>
+                                                    <td><center><button onClick={() => {history.push({pathname: "/updateItem", state:{item:item}})}} ><FaEdit /></button></center></td>
+                                                    <td><center><button onClick={() => {deletePayment(item); window.location.reload()}}><FaTrashAlt /></button></center></td>
+                                                </tr>
+                                            )
+                                        })}
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                        {
-                                            icon: 'delete',
-                                            tooltip: 'Delete hall',
-
-                                        }
-                                    ]}
-                                    // components={{
-                                    //     Container: props => <Paper {...props} elevation={0}/>,
-                                    //     Action:
-                                    //         props => {
-                                            //     if (props.action.icon === 'edit') {
-                                            //         return (
-                                            //             <button
-                                            //                 className="MuiButtonBase-root
-                                            //     MuiIconButton-root MuiIconButton-colorInherit"
-                                            //                 tabIndex="0"
-                                            //                 type="button"
-                                            //                 title="Edit Hall"
-                                            //                 onClick={(event, rowData) => {
-                                            //                     history.push({
-                                            //                         pathname: '/halls/edit-hall/' + props.data.id,
-                                            //                         state: props.data
-                                            //                     });
-                                            //                     console.log(props.data);
-                                            //                 }}
-                                            //             >
-                                            //     <span className="MuiIconButton-label">
-                                            //         <span className="material-icons MuiIcon-root"
-                                            //               aria-hidden="true">
-                                            //             edit
-                                            //         </span>
-                                            // </span>
-                                            //                 <span className="MuiTouchRipple-root"></span>
-                                            //             </button>
-                                            //         )
-                                            //     }
-                                            //     if (props.action.icon === 'delete') {
-                                            //         return (
-                                            //             <button
-                                            //                 className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"
-                                            //                 tabIndex="0"
-                                            //                 type="button"
-                                            //                 title="Delete Hall"
-                                            //                 onClick={(event, rowData) => deleteHall(props)}
-                                            //             >
-                                            //     <span
-                                            //         className="MuiIconButton-label">
-                                            //         <span className="material-icons MuiIcon-root"
-                                            //               aria-hidden="true">
-                                            //             delete
-                                            //         </span>
-                                            //     </span>
-                                            //                 <span className="MuiTouchRipple-root"></span>
-                                            //             </button>
-                                            //         )
-                                            //     }
-                                            // }
-
-                                    // }}
-
-                                    options={{
-                                        actionsColumnIndex: -1,
-                                        headerStyle: {
-                                            backgroundColor: "#cae3f5",
-                                            textAlign: "left",
-                                        },
-                                        tableLayout: 'auto',
-                                        exportButton: false,
-                                        sorting: true,
-                                        pageSize: 6,
-                                        pageSizeOptions: [6],
-                                        showTitle: false,
-                                        toolbarButtonAlignment: 'left',
-                                    }}
-
-                                />
                             </div>
                         </div>
                     </div>
