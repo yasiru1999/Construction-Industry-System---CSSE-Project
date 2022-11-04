@@ -93,7 +93,34 @@
     display: table;
     clear: both;
 }
+.colum2 {
+    float: left;
+    width: 100%;
+    padding: 10px;
+    height: 120px;
 
+}
+.colLeft {
+    width: 45%;
+    background-color: #88a6f2;
+    border-radius: 15px;
+    height: 450px;
+}
+
+.colRight {
+    width: 45%;
+    background-color: #88a6f2;
+    border-radius: 15px;
+    margin-left: 20px;
+    height: 450px;
+}
+.row3 {
+    content: "";
+    display: table;
+    clear: both;
+    width: 100%;
+
+}
 .itemName{
     height:40px;
     font-size: 15px;
@@ -113,6 +140,18 @@
     display: flex;
     margin-top: 1vh;
     margin-left: 70px;
+}
+.main-container-tables3{
+    width: 100%;
+    height: 450px;
+    background-color: #cae3f5;
+    float: left;
+    border-radius: 15px;
+    font-size: 14px;
+    padding: 10px;
+    display: flex;
+    margin-top: 1vh;
+
 }
 .table-container2{
     width: 100%;
