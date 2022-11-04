@@ -80,6 +80,31 @@ const deleteItem = async (request,response) => {
     })
 }
 
+const getSupplierByItem = async(request,response) => {
+    try {
+        let item = request.params.item;
+        SupplyItem.find({ItemName: item}, (error, data) => {
+            if (error) {
+                response.status(500).json({error: error.message});
+            } else {
+                response.status(200).json(data)
+            }
+        })
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+/*router.get("/getAll/:item", async (req, res) => {
+    try {
+      let module = req.params.module;
+      const allSessions = await NoticeSession.find({ moduleNo: module });
+      res.status(200).json(allSessions);
+    } catch (err) {
+      res.json(err);
+    }
+})*/
+
 
 
 
@@ -87,6 +112,7 @@ module.exports = {
     addSupplyItem,
     getSupllyAllItems,
     updateSupplyItem,
-    deleteItem
+    deleteItem,
+    getSupplierByItem
 
 }

@@ -4,10 +4,16 @@ const Schema = mongoose.Schema;
 
 const supplierOrderSchema = new Schema({
     supID : {type : String},
+    supCompany : {type : String},
+    supName : {type : String},
+    supContact : {type : String},
+    supAddress : {type : String},
+
     orderId : {type : String},
-    orderedItemName : {type : String},
+    itemName : {type : String},
     orderQty : {type : Number},  /*order quantity, approved by procurement staff*/
-    totalPrice : {type : String},
+    totalPrice : {type : Number},
+
     status : {type : String}, /*mention, about approved by procurement staff*/
     dueDate : {type : String},
     approver : {type : String},
@@ -19,12 +25,6 @@ const supplierOrderSchema = new Schema({
     siteAddress : {type : String},
 
     deliveryStatus : {type : String, default : 'Pending'},
-
-
-    supCompany : {type : String, default : 'Not Assigned'},
-    supName : {type : String, default : 'Not Assigned'},
-    supContact : {type : String, default : 'Not Assigned'},
-    supAddress : {type : String, default : 'Not Assigned'},
 
 }, {
     timestamps: true,

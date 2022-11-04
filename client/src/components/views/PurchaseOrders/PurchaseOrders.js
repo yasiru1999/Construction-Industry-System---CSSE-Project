@@ -33,7 +33,7 @@ export const PurchaseOrders = () => {
                         padding: '5px 20px',                         
                               }}
                               
-                    onClick={()=> buttonOnClickFunction(item.orderId)}>Select </button>
+                    onClick={()=> buttonOnClickFunction(item._id)}>Select </button>
 
                 })));
                 // setTimeout(console.log(purchaseOrders),3000)
@@ -45,7 +45,7 @@ export const PurchaseOrders = () => {
     },[])
 
   const buttonOnClickFunction = (event) => {
-    history.push(`/purchaseOrder/orderbyId`);
+    history.push(`/purchaseOrderbyId/${event}`);
   }
     
     return (

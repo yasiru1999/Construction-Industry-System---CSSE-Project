@@ -1,18 +1,34 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { withRouter, useParams } from 'react-router-dom';
 import './PurchaseOrder.css'
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-import { useDispatch } from "react-redux";
-import axios from "axios";
+//import { Formik } from 'formik';
+//import * as Yup from 'yup';
+//import { useDispatch } from "react-redux";
+import axios from 'axios';
 
 function OrderDetail(props) {
 
-    const [noticeList, setNoticeList] = useState([]);
+    const {id} = useParams(""); 
+
+    const [PoList, setPoList] = useState({
+        orderId:"", itemName:"", quantity:"", approver:"", siteName:"", siteManager:"", siteContactNo:"",
+        siteAddress:"", approvedQty:"", dueDate:"", priority:"", approvelStatus:"", comment:"", condition:"",
+        deliveryStatus:"", supCompany:"", supName:"", supContact:"", supAddress:""});
+
+    useEffect(() => {
+        const getDetailsList = async() => {
+            try {
+                const res = await axios.get(`http://localhost:8070/purchaseOrder/get-one/${id}`)
+                setPoList(res.data);
+            } catch(err) {
+                console.log(err);
+            }
+        }
+        getDetailsList()
+    },[]);
   
   return (
     <div>
- 
         <div className="page">
 
             <center>
@@ -23,7 +39,7 @@ function OrderDetail(props) {
 
                 <div class="column1" >
                     <div className="card2">
-                        <h3 className="topicPoNum">OR001</h3><br/><br/>
+                        <h3 className="topicPoNum">{PoList.orderId}</h3><br/><br/>
 
                         <div class="row">
                             <div class="column2" >
@@ -31,23 +47,23 @@ function OrderDetail(props) {
 
                                 <div class="column22" >
                                     <div className="dataleft22">
-                                        <label>Item Name</label><br/>
+                                        <label>Item</label><br/>
                                         <label>Quantity</label><br/>
                                         <label>Status</label><br/>
                                         <label>Due Date</label><br/>
-                                        <label>Approver</label><br/>
+                                        <label>Approver</label><br/><br/>
                                         <label>Condition</label><br/>
                                     </div>
                                 </div>
 
                                 <div class="column23" >
                                     <div className="dataleft23">
-                                        <label>Cement bags</label><br/>
-                                        <label>30</label><br/>
-                                        <label>Pending</label><br/>
-                                        <label>2022-11-20</label><br/>
-                                        <label>Procument staff</label><br/>
-                                        <label>No Condition</label><br/>
+                                        <label>{PoList.itemName}</label><br/>
+                                        <label>{PoList.quantity}</label><br/>
+                                        <label>{PoList.approvelStatus}</label><br/>
+                                        <label>{PoList.dueDate}</label><br/>
+                                        <label>{PoList.approver}</label><br/>
+                                        <label>{PoList.condition}</label><br/>
                                     </div>
                                 </div>
                                 
@@ -59,7 +75,7 @@ function OrderDetail(props) {
                                 <div class="column24" >
                                     <div className="dataleft22">
                                         <label>Site Name</label><br/>
-                                        <label>Manager Name</label><br/>
+                                        <label>Manager</label><br/>
                                         <label>Contact no</label><br/>
                                         <label>Site Address</label><br/>
                                     </div>
@@ -67,10 +83,10 @@ function OrderDetail(props) {
 
                                 <div class="column25" >
                                     <div className="dataleft23">
-                                        <label>Nova Construction</label><br/>
-                                        <label>A J S Dilshan</label><br/>
-                                        <label>0775630159</label><br/>
-                                        <label>Colombo 03</label><br/>
+                                        <label>{PoList.siteName}</label><br/>
+                                        <label>{PoList.siteManager}</label><br/>
+                                        <label>{PoList.siteContactNo}</label><br/>
+                                        <label>{PoList.siteAddress}</label><br/>
                                     </div>
                                 </div>
                             </div>  

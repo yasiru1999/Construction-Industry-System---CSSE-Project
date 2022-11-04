@@ -9,6 +9,7 @@ const employeeRoute = require('./routes/employee.route');
 const purchaseOrderRoute = require('./routes/purchaseOrder.route');
 const siteRoute = require('./routes/site.route');
 const supplyItemsRoute = require('./routes/SupplyItem.route');
+const supplierOrderRoute = require('./routes/supplierOrder.route');
 
 dotenv.config();
 const app = express();
@@ -43,6 +44,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/purchaseOrder',purchaseOrderRoute())
 app.use('/sites', siteRoute());
 app.use('/supplyItem', supplyItemsRoute());
+app.use('/supplierOrder', supplierOrderRoute());
 
 app.listen(PORT,()=>{
     console.log(`Server is up and running on port ${PORT}`);

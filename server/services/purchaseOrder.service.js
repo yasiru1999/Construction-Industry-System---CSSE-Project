@@ -1,5 +1,11 @@
 const PurchaseOrder = require('../models/purchaseOrder.model');
 
+/*const getPurchaseOrder = async(request,response) => {
+    let id = request.params.id;
+    PurchaseOrder.findById(id, function (err, detail) {
+        response.json(detail);
+    });
+}*/
 
 const getPurchaseOrder = async(request,response) => {
     try {
@@ -7,10 +13,7 @@ const getPurchaseOrder = async(request,response) => {
             if (error) {
                 response.status(500).json({error: error.message});
             } else {
-                response.status(200).json({
-                    success: true,
-                    purchaseOrder: data
-                })
+                response.status(200).json(data)
             }
         })
     } catch (e) {
