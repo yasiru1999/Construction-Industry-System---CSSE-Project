@@ -207,7 +207,7 @@ export const EditEmployee = (props)=>{
                             // multiline
                             id="dateOfBirth"
                          label="Birthday"
-                         type="date"
+                        //  type="date"
                         //  defaultValue="2017-05-24"
                          sx={{ width: 220 }}
                          InputLabelProps={{
