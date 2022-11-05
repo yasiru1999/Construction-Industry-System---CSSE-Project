@@ -10,6 +10,9 @@ module.exports = () => {
     router.get('/getOne/:id', PurchaseOrderService.onePurchaseOrder);
     router.get('/get-all', PurchaseOrderService.getAllPurchaseOrders);
     router.put('/', PurchaseOrderService.updatePurchaseOrder);
+    router.get('/getOrders', PurchaseOrderService.getOrders);
+    router.get('/get/:state',PurchaseOrderService.geByStatus);
+
     router.post('/add', PurchaseOrderService.addPurchaseOrder);
     router.delete('/delete-one/:id', PurchaseOrderService.deletePurchaseOrder);
 

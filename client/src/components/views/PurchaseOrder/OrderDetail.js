@@ -15,10 +15,16 @@ function OrderDetail(props) {
         siteAddress:"", approvedQty:"", dueDate:"", priority:"", approvelStatus:"", comment:"", condition:"",
         deliveryStatus:"", supCompany:"", supName:"", supContact:"", supAddress:""});
 
-    const [PoListUpdate, setPoListUpdate] = useState({
+    const resetForm = () => {
+        setPoList({ orderId:"", itemName:"", quantity:"", approver:"", siteName:"", siteManager:"", siteContactNo:"",
+        siteAddress:"", approvedQty:"", dueDate:"", priority:"", approvelStatus:"", comment:"", condition:"",
+        deliveryStatus:"", supCompany:"", supName:"", supContact:"", supAddress:"" });
+    }
+
+    /*const [PoListUpdate, setPoListUpdate] = useState({
         orderId:"", itemName:"", quantity:"", approver:"", siteName:"", siteManager:"", siteContactNo:"",
         siteAddress:"", approvedQty:"", dueDate:"", priority:"", approvelStatus:"", comment:"", condition:"",
-        deliveryStatus:"", supCompany:"", supName:"", supContact:"", supAddress:""});
+        deliveryStatus:"", supCompany:"", supName:"", supContact:"", supAddress:""});*/
     
     const [supplierList, setSupplierList] = useState([]);
     const [supplier, setSupplier] = useState({Price:"", supName:""});
@@ -57,19 +63,64 @@ function OrderDetail(props) {
         //e.preventDefault();
         const ListUpdate = {
             _id: id,
-            approvedQty:50,
+            approvedQty: PoList.quantity,
             approvelStatus: "Approved",
             supCompany: supplier.supName,
             supName: supplier.supName,
             supContact: "0779863015",
-            supAddress: "Colombo 02"
+            totalPrice: totalAmount,
+            comment: PoList.comment
         }
         axios.put(`http://localhost:8070/purchaseOrder`, ListUpdate).then(() => {
             alert("Successfully Approved");
+            props.history.push(`/purchaseOrders`)
+            resetForm();
         }).catch((err) => {
             alert("Fild to Approved!");
             alert(err)
         });
+    }
+
+    function isPartiallyApproved(){
+        //e.preventDefault();
+        const ListUpdate = {
+            _id: id,
+            approvedQty: PoList.quantity,
+            approvelStatus: "Partially_Approved",
+            supCompany: supplier.supName,
+            supName: supplier.supName,
+            supContact: "0779863015",
+            totalPrice: totalAmount,
+            comment: PoList.comment
+        }
+        axios.put(`http://localhost:8070/purchaseOrder`, ListUpdate).then(() => {
+            alert("Partially Approved");
+        }).catch((err) => {
+            alert("Fild to Approved!");
+            alert(err)
+        });
+    }
+
+    function isReject(){
+        //e.preventDefault();
+        const ListUpdate = {
+            _id: id,
+            approvedQty:0,
+            approvelStatus: "Rejected",
+            totalPrice: 0,
+            comment: PoList.comment
+        }
+        axios.put(`http://localhost:8070/purchaseOrder`, ListUpdate).then(() => {
+            alert("Order Rejected");
+            props.history.push(`/OrderList`)
+        }).catch((err) => {
+            alert("Fild to reject!");
+            alert(err)
+        });
+    }
+
+    const onChange = e => {
+        setPoList({ ...PoList, [e.target.name]: e.target.value });
     }
 
   
@@ -163,9 +214,9 @@ function OrderDetail(props) {
                                         <tbody className='table-group-divider'>
                                         {
                                             supplierList.map((detail, id) => (
-                                                <tr key={id} onClick={() => SupplierSelect(detail.supID)}>
+                                                <tr className='sup' key={id} onClick={() => SupplierSelect(detail.supID)}>
                                                     <td>{detail.supID}</td>
-                                                    <td className='tablegap'>{detail.supName}</td>
+                                                    <td className='tablegap '>{detail.supName}</td>
                                                     <td>Rs. {detail.Price}</td>                      
                                                 </tr>
                                             ))
@@ -173,7 +224,7 @@ function OrderDetail(props) {
                                         </tbody>
                                     </table>
                                 </div>
-                                
+                                 
                             </div>
                             
                             <div class="columnRIn2" >
@@ -193,9 +244,21 @@ function OrderDetail(props) {
                                         <label>Rs 1000000</label><br/>
                                     </div>
                                 </div>
-                            </div>  
-                            <button className="buttonPaAp">Partially Approved</button>       
-                            <button className="buttonRej">Reject</button> 
+                            </div>
+
+                            <label for="name" className='labelStypeL'>Enter Comment</label>
+                            <label for="name" className='labelStypeR'>New quantity</label><br/>
+                            <input type="text" className="form-control inputL" id="name" placeholder="Comment.." name='comment'
+                                    value={PoList.comment} onChange={onChange} required></input>  
+
+                            
+                            <input type="number" className="form-control" id="name" placeholder="Enter new Qty.." name='quantity'
+                                    value={PoList.quantity} onChange={onChange} required></input>
+
+                            <button className="buttonPaAp" onClick={() => isPartiallyApproved()}>Partially Approved</button>     
+
+                            <button className="buttonRej" onClick={() => isReject()}>Reject</button> 
+ 
                             <button className="buttonAp" onClick={() => isApproved()}>Approved</button>    
                         </div>
 

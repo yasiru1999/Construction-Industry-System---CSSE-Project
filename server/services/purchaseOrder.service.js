@@ -128,6 +128,36 @@ const onePurchaseOrder = async (request,response) => {
         });
 }
 
+const getOrders = async(request,response) => {
+    try {
+        PurchaseOrder.find({}, (error, data) => {
+            if (error) {
+                response.status(500).json({error: error.message});
+            } else {
+                response.status(200).json(data)
+            }
+        })
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+const geByStatus = async(request,response) => {
+    try {
+        let state = request.params.state;
+        PurchaseOrder.find({approvelStatus: state}, (error, data) => {
+            if (error) {
+                response.status(500).json({error: error.message});
+            } else {
+                response.status(200).json(data)
+            }
+        })
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
 module.exports = {
     getPurchaseOrder,
     getPurchaseOrders,
@@ -135,5 +165,7 @@ module.exports = {
     updatePurchaseOrder,
     addPurchaseOrder,
     deletePurchaseOrder,
-    onePurchaseOrder
+    onePurchaseOrder,
+    getOrders,
+    geByStatus,
 }

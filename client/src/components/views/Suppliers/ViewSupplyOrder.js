@@ -5,10 +5,11 @@ import './Suppliers.css'
 import { Formik } from 'formik';
 import {Form} from "antd";
 import Select from "react-select";
-import user from "./user2.png";
+import GeneratePdf from "./GenerateReceipt"
 
 const statuses = [
-    { value: 'delivered', label: 'delivered' }
+    { value: 'delivered', label: 'delivered' },
+    { value: 'completed', label: 'completed' }
 ]
 
 export const ViewSupplyOrder = (props) => {
@@ -26,8 +27,9 @@ export const ViewSupplyOrder = (props) => {
     const [siteContactNu,setSiteContactNu] = useState("");
     const [siteAddress,setSiteAddress] = useState("");
     const [totPrice,setTotPrice] = useState("");
-
     const [deliveryStatus,setDeliveryStatus] = useState('');
+
+    const [Order, setOrder] = useState([]);
 
     const location = useLocation();
     useEffect(() =>{
@@ -44,19 +46,23 @@ export const ViewSupplyOrder = (props) => {
         setSiteContactNu(location.state.order.siteContactNo)
         setSiteAddress(location.state.order.siteAddress)
         setTotPrice(location.state.order.totalPrice)
+        setDeliveryStatus(location.state.order.deliveryStatus)
 
+        setOrder(location.state.order);
     },[location])
     return (
         <Formik
             initialValues={{
-                status:""
+                _id:ID,
+                deliveryStatus:""
             }}
             onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
                     let dataToSubmit = {
-                        status: deliveryStatus.value,
+                        _id:ID,
+                        deliveryStatus: deliveryStatus.value,
                     };
-                    axios.put('http://localhost:8070/supplyItem/add', dataToSubmit)
+                    axios.put('http://localhost:8070/purchaseOrder/' , dataToSubmit)
                         .then(response => {
                             console.log(dataToSubmit)
                             if (response.data.success) {
@@ -148,7 +154,10 @@ export const ViewSupplyOrder = (props) => {
                                         </tr>
                                         <br/>
                                         <h2>Delivery Status</h2>
-
+                                        {/*<tr>*/}
+                                        {/*    <td>Status</td>*/}
+                                        {/*    <td><b>{deliveryStatus}</b></td>*/}
+                                        {/*</tr>*/}
                                     </table><br/>
                                     <div className="row3">
                                         <div className="">
@@ -175,6 +184,7 @@ export const ViewSupplyOrder = (props) => {
                                             </Form>
                                                 <div className="colum3 colSide3">
                                                     <button
+
                                                         className='selectBtn3'
                                                         type="submit"
                                                     >Generate Receipt

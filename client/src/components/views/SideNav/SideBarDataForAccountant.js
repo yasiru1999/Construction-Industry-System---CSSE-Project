@@ -8,7 +8,7 @@ export const SideBarDataForAccountant = [
     },
     {
         title: 'Supplier Request',
-        path: '/login'
+        path: '/'
 
     },
     {
