@@ -203,7 +203,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
-    margin-top: 65px;
+    margin-top: 45px;
     margin-bottom: 10px;
     margin-left: 2px;
     margin-right: 2px;
@@ -222,7 +222,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
-    margin-top: 65px;
+    margin-top: 45px;
     margin-bottom: 10px;
     margin-left: 42px;
     margin-right: 42px;
@@ -241,7 +241,7 @@
     text-decoration: none;
     display: inline-block;
     font-size: 13px;
-    margin-top: 65px;
+    margin-top: 45px;
     margin-bottom: 10px;
     margin-left: 2px;
     margin-right: 2px;
@@ -252,4 +252,113 @@
   .tablegap{
     padding-left: 35px;
     padding-right: 35px;
+  }
+
+  .sup:hover {
+    background-color: #538edf;
+    cursor: pointer;
+  }
+
+  .inputL{
+    width: 350px;
+  }
+
+  .labelStypeL{
+    float: left;
+    padding-right: 200px;
+  }
+
+  .tablegap2{
+    padding-left: 65px;
+    padding-right: 65px;
+  }
+
+  .buttonState {
+    border-radius: 5px;
+    background-color: #6a9eec;
+    border: 1px solid black;
+    color: black;
+    padding: 15px 48px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .buttonState3 {
+    border-radius: 5px;
+    background-color: #83e83b;
+    border: 1px solid black;
+    color: black;
+    padding: 15px 38px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .buttonState3p {
+    border-radius: 5px;
+    background-color: #e8e83b;
+    border: 1px solid black;
+    color: black;
+    padding: 15px 38px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .buttonState3r {
+    border-radius: 5px;
+    background-color: #f0362c;
+    border: 1px solid black;
+    color: black;
+    padding: 15px 38px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  .buttonState4 {
+    border-radius: 5px;
+    background-color: #e8cb73;
+    border: 1px solid black;
+    color: black;
+    padding: 15px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin-top: 65px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
   }
