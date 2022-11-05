@@ -75,18 +75,7 @@ const SubMenu = ({ item }) => {
                 </Link>
             </div>
             <hr className={'hr'}/>
-            {subnav &&
-            item.subNav.map((item, index) => {
-                return (
-                    <div className={'wrap'}>
-                        <Link to={item.path}>
-                            <DropdownLink key={index}>
-                                <SidebarLabel>{item.title}</SidebarLabel>
-                            </DropdownLink>
-                        </Link>
-                    </div>
-                );
-            })}
+
         </>
     );
 };

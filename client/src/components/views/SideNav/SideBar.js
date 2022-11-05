@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import * as FaIcons from 'react-icons/fa';
-import * as AiIcons from 'react-icons/ai';
 import { SideBarDataForSupliers } from './SideBarDataForSupliers';
 import { SideBarDataForAccountant } from './SideBarDataForAccountant'
 import SubMenu from './SubMenu';
 import { IconContext } from 'react-icons/lib';
 import User from './user.png'
 import './sidebar.css'
+import '../Suppliers/Suppliers.css'
 
 const NavLogo = styled.button`
   width: 100%;
@@ -65,8 +64,18 @@ const Upper = styled.div`
   background-color: #55b8ff;
 `;
 
+function logout() {
+    localStorage.removeItem("supID");
+    localStorage.removeItem("role");
+    localStorage.removeItem("name");
+    localStorage.removeItem("userId");
+
+}
+
 const Sidebar = () => {
+
     const role = localStorage.getItem('role');
+    const name = localStorage.getItem('name');
     if (role === "Supplier") {
         return (
             <>
@@ -81,13 +90,21 @@ const Sidebar = () => {
 
                                     <NavLogo to='#'>
                                         <img className={'userImage'} src={User}/>
-                                        Yasiru
+                                        {name}
                                     </NavLogo>
                                 </div>
                                 <hr className={'hr'}/>
                                 {SideBarDataForSupliers.map((item, index) => {
                                     return <SubMenu item={item} key={index}/>;
                                 })}
+                                <button
+                                    className="selectBtn7"
+                                    onClick={() =>
+                                    {logout();
+                                        window.location.reload()}}
+                                >
+                                    Sign Out
+                                </button>
                             </SidebarWrap>
                         </SidebarNav>
                     </IconContext.Provider>
@@ -110,6 +127,14 @@ const Sidebar = () => {
                                 {SideBarDataForAccountant.map((item, index) => {
                                     return <SubMenu item={item} key={index}/>;
                                 })}
+                                <button
+                                    className="selectBtn7"
+                                    onClick={() =>
+                                    {logout();
+                                        window.location.reload()}}
+                                >
+                                    Sign Out
+                                </button>
                             </SidebarWrap>
                         </SidebarNav>
                     </IconContext.Provider>
@@ -119,7 +144,20 @@ const Sidebar = () => {
     } else {
         return (
         <>
+            <SideBar>
 
+                <IconContext.Provider value={{color: '#00000'}}>
+                    <SidebarNav>
+                        <SidebarWrap>
+                            <Upper></Upper>
+                            <div className={'wrap'}>
+                            </div>
+                            <hr className={'hr'}/>
+
+                        </SidebarWrap>
+                    </SidebarNav>
+                </IconContext.Provider>
+            </SideBar>
 
         </>
         )
