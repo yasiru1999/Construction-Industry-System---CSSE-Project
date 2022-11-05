@@ -9,6 +9,8 @@ module.exports = () => {
     router.get('/', PurchaseOrderService.getPurchaseOrder);
     router.get('/get-all', PurchaseOrderService.getAllPurchaseOrders);
     router.put('/', PurchaseOrderService.updatePurchaseOrder);
-
+    router.get('/getOrders', PurchaseOrderService.getOrders);
+    router.get('/get/:state',PurchaseOrderService.geByStatus);
+    
     return router;
 }
