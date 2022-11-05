@@ -136,7 +136,7 @@ export const AddSite = () => {
                             fullWidth
                             id="budget"
                             name="budget"
-                            label="Budget"
+                            label="Budget(Rs.)"
                             value={formik.values.budget}
                             onChange={formik.handleChange}
                             error={formik.touched.budget && Boolean(formik.errors.budget)}
