@@ -3,14 +3,14 @@ import 'package:provider/provider.dart';
 import '../providers/purchase_order.dart';
 
 // ignore: camel_case_types
-class addOrderView extends StatefulWidget {
-  const addOrderView({super.key});
+class OrderView extends StatefulWidget {
+  const OrderView({super.key});
   @override
-  State<addOrderView> createState() => _addOrderViewState();
+  State<OrderView> createState() => _OrderViewState();
 }
 
 // ignore: camel_case_types
-class _addOrderViewState extends State<addOrderView> {
+class _OrderViewState extends State<OrderView> {
 
   final _formKey = GlobalKey<FormState>();
 

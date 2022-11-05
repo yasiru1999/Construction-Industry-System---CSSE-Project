@@ -7,10 +7,11 @@ const SupplyItemService = require("../services/SupplyItems.service");
 module.exports = () => {
 
     router.get('/get-one/:id', PurchaseOrderService.getPurchaseOrder);
-    router.get('/', PurchaseOrderService.getPurchaseOrder);
+    router.get('/getOne/:id', PurchaseOrderService.onePurchaseOrder);
     router.get('/get-all', PurchaseOrderService.getAllPurchaseOrders);
     router.put('/', PurchaseOrderService.updatePurchaseOrder);
     router.post('/add', PurchaseOrderService.addPurchaseOrder);
+    router.delete('/delete-one/:id', PurchaseOrderService.deletePurchaseOrder);
 
     return router;
 }

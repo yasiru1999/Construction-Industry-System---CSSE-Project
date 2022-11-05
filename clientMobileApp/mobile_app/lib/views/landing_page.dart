@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/purchase_order.dart';
 import 'add_purchase_order.dart';
 import 'home_view.dart';
 

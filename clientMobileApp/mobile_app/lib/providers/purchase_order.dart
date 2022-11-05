@@ -19,6 +19,14 @@ class purchaseOrderProvider extends ChangeNotifier{
     purchaseOrders = parsedData['purchaseOrder'];
   }
 
+  //get request
+  Future fetchOneData(String id) async {
+    final Uri restAPIURL = Uri.parse("http://localhost:8070/purchaseOrder/getOne/$id");
+    http.Response response = await httpClient.get(restAPIURL);
+    final Map parsedData = await json.decode(response.body.toString());
+    purchaseOrders = parsedData['purchaseOrder'];
+  }
+
   //post request
   Future addData(Map<String,String> body) async {
     final Uri restAPIURL = Uri.parse("http://localhost:8070/purchaseOrder/add");
@@ -27,11 +35,18 @@ class purchaseOrderProvider extends ChangeNotifier{
   }
 
   //get specific request
-  Future fetchSpecificData(String id) async {
-    final Uri restAPIURL = Uri.parse('http://localhost:8070/purchaseOrder/get-one/$id');
-    http.Response response = await httpClient.get(restAPIURL, headers: customHeaders);
-    final Map parsedData = await json.decode(response.body.toString());
-    purchaseOrders = parsedData['purchaseOrder'];
+  Future fetchSpecificData(Map<String, String> data,String id) async {
+    final Uri restAPIURL = Uri.parse('http://localhost:8070/purchaseOrder/getOne/$id');
+    http.Response response = await httpClient.put(restAPIURL, headers: customHeaders, body:jsonEncode(data) );
+    return response.body;
+  }
+
+  //delete specific request
+  Future deleteData(String id) async {
+    final Uri restAPIURL = Uri.parse('http://localhost:8070/purchaseOrder/delete-one/$id');
+    http.Response response = await httpClient.delete(restAPIURL, headers: customHeaders,
+    body: jsonEncode({"id" : id}));
+    return response.body;
   }
 
 

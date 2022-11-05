@@ -1,4 +1,6 @@
 const PurchaseOrder = require('../models/purchaseOrder.model');
+const {request, response} = require("express");
+const SupplyItem = require("../models/SupplyItem.model");
 
 
 const getPurchaseOrder = async(request,response) => {
@@ -91,11 +93,47 @@ const updatePurchaseOrder = async (request,response) => {
         });
 }
 
+
+const deletePurchaseOrder = async (request,response) => {
+    await PurchaseOrder.findByIdAndRemove(request.params.id,(error,item) => {
+        if(error){
+            response.status(500).json({ error: error.message });
+        }
+        else{
+            response.status(200).
+            json({
+                success: true,
+                item: item
+            })
+        }
+    })
+}
+
+const onePurchaseOrder = async (request,response) => {
+    const po = new PurchaseOrder(request.body);
+    console.log(po);
+    await PurchaseOrder.findByIdAndUpdate(request.params.id,po,
+        (error,po) => {
+            if(error){
+                console.log(error);
+                response.status(500).json({ error: error.message });
+            }
+            else{
+                response.status(200).
+                json({
+                    success: true,
+                    po:po
+                })
+            }
+        });
+}
+
 module.exports = {
     getPurchaseOrder,
     getPurchaseOrders,
     getAllPurchaseOrders,
-    updatePurchaseOrder
-    getAllPurchaseOrders,
-    addPurchaseOrder
+    updatePurchaseOrder,
+    addPurchaseOrder,
+    deletePurchaseOrder,
+    onePurchaseOrder
 }

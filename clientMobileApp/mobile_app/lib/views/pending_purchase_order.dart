@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:mobile_app/views/update_purchase_order.dart';
 import 'package:provider/provider.dart';
 import '../providers/purchase_order.dart';
 
@@ -31,15 +30,15 @@ class _pendingViewState extends State<pendingView> {
                             children: <Widget> [
                               Column(
                                 children: const [
-                                  Padding(padding: EdgeInsets.only(left: 10, top: 5),
-                                      child: Icon(Icons.send)
+                                  Padding(padding: EdgeInsets.only(left: 30, top: 20),
+                                      child: Icon(Icons.shopping_cart_outlined, size : 50)
                                   ),
                                 ]
                               ),
 
                               Column(
                                   children: [
-                                    Padding(padding: const EdgeInsets.only(left: 80, top: 5),
+                                    Padding(padding: const EdgeInsets.only(left: 280, top: 5),
                                         child: Column (
                                           children: const [
                                             Text('Order ID'),
@@ -54,26 +53,30 @@ class _pendingViewState extends State<pendingView> {
 
                               Column(
                                   children: [
-                                    Padding(padding: const EdgeInsets.only(left: 250, top: 5),
+                                    Padding(padding: const EdgeInsets.only(left: 650, top: 5),
                                         child: Column (
                                              children: [
                                                Text(model.purchaseOrders?[index]['orderId']),
                                                Text(model.purchaseOrders?[index]['itemName']),
                                                Text((model.purchaseOrders?[index]["quantity"]).toString()),
-                                               Text(model.purchaseOrders?[index]['approvelStatus'])
-                                                       ],
-                                                       )
+                                               const Text('Pending'),
+                                             ],
+                                        )
                                     ),
                                   ]
                               ),
                               Column(
                                   children: [
-                                    Padding(padding: const EdgeInsets.only(left: 350, top: 5),
+                                    Padding(padding: const EdgeInsets.only(left: 1100, top: 5),
                                         child: Column (
-                                          children: const [
-                                             TextButton(onPressed: null , child: Text('view')),
-                                             TextButton(onPressed: null , child: Text('Edit')),
-                                             TextButton(onPressed: null , child: Text('Delete')),
+                                          children:  [
+                                             const TextButton(onPressed: null , child: Text('view')),
+                                             TextButton(onPressed: () => {
+                                               updateDataWidget(context, model.purchaseOrders?[index]['_id'])
+                                             } , child: const Text('Edit')),
+                                             TextButton(onPressed: () => {
+                                               model.deleteData(model.purchaseOrders?[index]['_id']),
+                                             } , child: const Text('Delete')),
                                           ],
                                         )
                                     ),
