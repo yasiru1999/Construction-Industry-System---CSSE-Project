@@ -42,9 +42,9 @@ function UpdateItems(props) {
     const onSubmit = (event) => {
         event.preventDefault();
 
-        // if (!studentID || !studentName || !phoneNo || !registeredCourse || !paymentAmount || !paymentAmount) {
-        //     return alert('fill all the fields first!')
-        // }
+        if (!itemID || !itemName || !price || !qty ) {
+            return alert('fill all the fields first!')
+        }
 
         const variables = {
             UserID: itemID,
@@ -54,7 +54,7 @@ function UpdateItems(props) {
         }
 
 
-        // Axios.put(`http://localhost:5001/api/users/updateUserInfo/${ID}`, variables)
+        // Axios.put(`http://localhost:8070/supplyItem/${ID}`, variables)
         //     .then(response => {
         //         if (response.data) {
         //             alert('User Details Successfully Edited')
@@ -112,7 +112,7 @@ function UpdateItems(props) {
                         style={{marginLeft: '300px'}}
                         className="selectBtn5"
                         onClick={onSubmit}>
-                        Submit
+                        Update
                     </Button>
 
                 </Form>
