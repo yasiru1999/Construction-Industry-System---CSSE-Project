@@ -21,6 +21,7 @@ import {AddSite} from "./components/views/Sites/AddSite";
 import OrderDetail from "./components/views/PurchaseOrder/OrderDetail";
 
 import {PurchaseOrders} from "./components/views/PurchaseOrders/PurchaseOrders";
+import OrdersList from "./components/views/PurchaseOrder/OrderList";
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
 
 
                     <Route path='/purchaseOrders' exact component={PurchaseOrders} />
+                    <Route path='/OrderList' exact component={OrdersList} />
 
 
                 </Switch>
