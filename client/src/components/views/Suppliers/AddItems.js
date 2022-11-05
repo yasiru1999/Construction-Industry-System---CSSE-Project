@@ -13,7 +13,8 @@ import { FaTrashAlt } from 'react-icons/fa';
 
 const Items = [
     { value: 'cement', label: 'cement' },
-    { value: 'iron bar', label: 'iron bar' }
+    { value: 'iron_bar', label: 'iron bar' },
+    { value: 'sand', label: 'sand' }
 ]
 
 // Creating schema

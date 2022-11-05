@@ -1,5 +1,4 @@
 import React from 'react';
-import {useLocation} from "react-router-dom";
 
 export const SideBarDataForSupliers = [
     {
@@ -14,9 +13,5 @@ export const SideBarDataForSupliers = [
     {
         title: 'Edit Profile',
         path: '/',
-    },
-    {
-        title: 'Sign Out',
-        path: '/'
     }
 ];

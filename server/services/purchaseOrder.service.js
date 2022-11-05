@@ -1,11 +1,7 @@
 const PurchaseOrder = require('../models/purchaseOrder.model');
+const {request, response} = require("express");
+const SupplyItem = require("../models/SupplyItem.model");
 
-/*const getPurchaseOrder = async(request,response) => {
-    let id = request.params.id;
-    PurchaseOrder.findById(id, function (err, detail) {
-        response.json(detail);
-    });
-}*/
 
 const getPurchaseOrder = async(request,response) => {
     try {
@@ -13,7 +9,10 @@ const getPurchaseOrder = async(request,response) => {
             if (error) {
                 response.status(500).json({error: error.message});
             } else {
-                response.status(200).json(data)
+                response.status(200).json({
+                    success: true,
+                    purchaseOrder: data
+                })
             }
         })
     } catch (e) {
@@ -55,11 +54,65 @@ const getPurchaseOrders = async (request, response) => {
     }
 }
 
+const addPurchaseOrder = async (request, response) => {
+
+    const Order = new PurchaseOrder(request.body);
+
+    await Order.save((error, Order) => {
+        if(error){
+            response.status(500).json({ error: error.message });
+            console.log(error.message)
+        }
+        else{
+            response.status(200).
+            json({
+                success: true,
+                Order: Order
+            })
+        }
+    });
+}
+
 //Update purchase order
 const updatePurchaseOrder = async (request,response) => {
     const po = new PurchaseOrder(request.body);
     console.log(po);
     await PurchaseOrder.findByIdAndUpdate(request.body._id,po,
+        (error,po) => {
+            if(error){
+                console.log(error);
+                response.status(500).json({ error: error.message });
+            }
+            else{
+                response.status(200).
+                json({
+                    success: true,
+                    po:po
+                })
+            }
+        });
+}
+
+
+const deletePurchaseOrder = async (request,response) => {
+    await PurchaseOrder.findByIdAndRemove(request.params.id,(error,item) => {
+        if(error){
+            response.status(500).json({ error: error.message });
+        }
+        else{
+            response.status(200).
+            json({
+                success: true,
+                item: item
+            })
+        }
+    })
+}
+
+const onePurchaseOrder = async (request,response) => {
+    const po = new PurchaseOrder(request.body);
+    console.log(po);
+    await PurchaseOrder.findByIdAndUpdate(request.params.id,po,
         (error,po) => {
             if(error){
                 console.log(error);
@@ -110,6 +163,9 @@ module.exports = {
     getPurchaseOrders,
     getAllPurchaseOrders,
     updatePurchaseOrder,
+    addPurchaseOrder,
+    deletePurchaseOrder,
+    onePurchaseOrder,
     getOrders,
     geByStatus,
 }

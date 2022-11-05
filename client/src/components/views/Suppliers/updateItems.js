@@ -7,17 +7,16 @@ import {useLocation} from "react-router-dom";
 
 function UpdateItems(props) {
 
+    const [id,setID] = useState("");
     const [itemID,setItemID] = useState("");
     const [itemName,setItemName] = useState("");
     const [price, setPrice] = useState("");
     const [qty, setQty] = useState("");
 
-
-    let [paymentsDate, setPaymentDate] = useState("");
-
     const location = useLocation();
 
     useEffect(() =>{
+        setID(location.state.item.id)
         setItemID(location.state.item.SupItemID)
         setItemName(location.state.item.ItemName)
         setPrice(location.state.item.Price)
@@ -52,17 +51,17 @@ function UpdateItems(props) {
             price: price,
             qty:qty
         }
+        console.log(variables);
 
-
-        // Axios.put(`http://localhost:8070/supplyItem/${ID}`, variables)
-        //     .then(response => {
-        //         if (response.data) {
-        //             alert('User Details Successfully Edited')
-        //             props.history.push('/AllUsers')
-        //         } else {
-        //             alert('User Details Successfully Edited')
-        //         }
-        //     })
+        Axios.put(`http://localhost:8070/supplyItem/` + id, variables)
+            .then(response => {
+                if (response.data) {
+                    alert('User Details Successfully Edited')
+                    props.history.push('/addItems')
+                } else {
+                    alert('User Details Successfully Edited')
+                }
+            })
 
     }
 
@@ -78,6 +77,7 @@ function UpdateItems(props) {
                     <Input
                         onChange={onUserIDChange}
                         value={itemID}
+                        disabled
                     />
 
                     <br />
@@ -87,6 +87,7 @@ function UpdateItems(props) {
                     <Input
                         onChange={onNameChange}
                         value={itemName}
+                        disabled
                     />
                     <br />
                     <br />
