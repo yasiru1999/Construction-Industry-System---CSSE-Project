@@ -95,6 +95,7 @@ function OrderDetail(props) {
         }
         axios.put(`http://localhost:8070/purchaseOrder`, ListUpdate).then(() => {
             alert("Partially Approved");
+            props.history.push(`/OrderList`)
         }).catch((err) => {
             alert("Fild to Approved!");
             alert(err)
